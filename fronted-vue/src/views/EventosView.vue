@@ -37,6 +37,10 @@
                   <input type="text" v-model="formData.eventName" required />
                 </div>
                 <div class="form-group">
+  <label for="genreName">Género Musical:</label>
+  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
+</div>
+                <div class="form-group">
                   <label for="description">Descripción:</label>
                   <input type="text" v-model="formData.description" required />
                 </div>
@@ -97,6 +101,10 @@
                   <input type="text" v-model="formData.eventName" required />
                 </div>
                 <div class="form-group">
+  <label for="genreName">Género Musical:</label>
+  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
+</div>
+                <div class="form-group">
                   <label for="description">Descripción:</label>
                   <input type="text" v-model="formData.description" required />
                 </div>
@@ -152,6 +160,7 @@
               <th><div class="cell">#</div></th>
               <th><div class="cell">Foto</div></th>
               <th><div class="cell">Nombre del Evento</div></th>
+              <th><div class="cell">Género Musical<br></div></th>
               <th><div class="cell">Descripción</div></th>
               <th><div class="cell">Ubicación</div></th>
               <th><div class="cell">Fecha</div></th>
@@ -175,6 +184,9 @@
               <td>
                 <div class="cell">{{ event.eventName }}</div>
               </td>
+              <td>
+  <div class="cell">{{ event.genreName }}</div>
+</td>
               <td>
                 <div class="cell">{{ event.description }}</div>
               </td>
@@ -246,6 +258,7 @@ export default {
       searchQuery: "",
       formData: {
         eventName: "",
+        genreName: "",
         description: "",
         location: "",
         date: "",
@@ -258,6 +271,7 @@ export default {
       events: [
         {
           eventName: "Concierto de Rock",
+          genreName: "Bachata",
           description: "Un evento emocionante con las mejores bandas de rock.",
           location: "Madison Square Garden, NY",
           date: "2024-08-15",
@@ -271,6 +285,7 @@ export default {
         },
         {
           eventName: "Festival de Jazz",
+          genreName: "Pop",
           description: "Un festival con los músicos de jazz más renombrados.",
           location: "Central Park, NY",
           date: "2024-09-10",
@@ -284,6 +299,7 @@ export default {
         },
         {
           eventName: "Exposición de Arte Moderno",
+          genreName: "Salsa",
           description: "Una muestra de las últimas tendencias en arte moderno.",
           location: "Museo de Arte Moderno, NY",
           date: "2024-10-05",
@@ -308,6 +324,7 @@ export default {
       return this.events.filter(
         (event) =>
           event.eventName.toLowerCase().includes(query) ||
+          event.genreName.toLowerCase().includes(query) ||
           event.description.toLowerCase().includes(query) ||
           event.location.toLowerCase().includes(query) ||
           event.date.toLowerCase().includes(query) ||
@@ -362,6 +379,7 @@ export default {
     resetFormData() {
       this.formData = {
         eventName: "",
+        genreName: "",
         description: "",
         location: "",
         date: "",
@@ -388,6 +406,7 @@ export default {
             <img src="${event.photo}" alt="Foto de ${event.eventName}" style="max-width: 100%; height: auto;">
           </div>
           <p><strong>Nombre del Evento:</strong> ${event.eventName}</p>
+           <p><strong>Género Musical:</strong><br> ${event. genreName}</p>
           <p><strong>Descripción:</strong> ${event.description}</p>
           <p><strong>Ubicación:</strong> ${event.location}</p>
           <p><strong>Fecha:</strong> ${event.date}</p>
@@ -531,6 +550,7 @@ th {
   padding: 10px;
   border-radius: 5px;
   display: inline-block;
+  
 }
 .cell:hover {
   background-color: white;
@@ -619,10 +639,10 @@ th {
   box-shadow: 5px 2px 3px 1px rgba(0, 0, 0, 0.164);
   padding: 5px 10px;
   cursor: pointer;
-  margin-left: 10px;
   width: 380px;
   border-radius: 10px;
   text-align: center;
+  margin-left: 530px;
 }
 
 .custom-form-group {

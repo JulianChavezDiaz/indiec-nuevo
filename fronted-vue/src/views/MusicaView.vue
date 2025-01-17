@@ -41,6 +41,10 @@
                   <input type="text" v-model="formData.artistName" required />
                 </div>
                 <div class="form-group">
+  <label for="genreName">Género Musical:</label>
+  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
+</div>
+                <div class="form-group">
                   <label for="album">Álbum:</label>
                   <input type="text" v-model="formData.album" required />
                 </div>
@@ -82,6 +86,10 @@
                   <input type="text" v-model="formData.artistName" required placeholder="ingrese del artista" />
                 </div>
                 <div class="form-group">
+  <label for="genreName">Género Musical:</label>
+  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
+</div>
+                <div class="form-group">
                   <label for="album">Álbum:</label>
                   <input type="text" v-model="formData.album" required placeholder="ingrese el album" />
                 </div>
@@ -115,6 +123,7 @@
               <th><div class="cell">Foto</div></th>
               <th><div class="cell">Nombre de la Canción</div></th>
               <th><div class="cell">Nombre del Artista</div></th>
+              <th><div class="cell">Género Musical<br></div></th>
               <th><div class="cell">Álbum</div></th>
               <th><div class="cell">Estado</div></th>
               <th><div class="cell">Acciones</div></th>
@@ -136,6 +145,9 @@
               <td>
                 <div class="cell">{{ song.artistName }}</div>
               </td>
+              <td>
+  <div class="cell">{{ song.genreName }}</div>
+</td>
               <td>
                 <div class="cell">{{ song.album }}</div>
               </td>
@@ -190,29 +202,33 @@ export default {
       formData: {
         songName: "",
         artistName: "",
+        genreName: "",
         album: "",
         status: "Activo",
         photo: "", // Agregado para almacenar la URL de la foto
       },
       songs: [
         {
-          photo: "https://i.pinimg.com/736x/48/22/bf/4822bf54ee339f9e3842192de95a906e.jpg",
+          photo: "https://www.nus.agency/wp-content/uploads/2023/03/musica-arte-scaled.jpg",
           songName: "Canción 1",
           artistName: "Artista 1",
+          genreName: "Bachata",
           album: "Álbum 1",
           status: "Activo",
         },
         {
-          photo: "https://i.pinimg.com/736x/48/22/bf/4822bf54ee339f9e3842192de95a906e.jpg",
+          photo: "https://estaticos.elcolombiano.com/binrepository/780x565/0c0/0d0/none/11101/EDTW/nostalgia-musica-1_42537840_20230605193530.jpg",
           songName: "Canción 2",
           artistName: "Artista 2",
+          genreName: "Pop",
           album: "Álbum 2",
           status: "Activo",
         },
         {
-          photo: "https://i.pinimg.com/736x/48/22/bf/4822bf54ee339f9e3842192de95a906e.jpg",
+          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiE-PlDusYL3t9pcMd3oZJrRoTu_IuZKgNzg&s",
           songName: "Canción 3",
           artistName: "Artista 3",
+          genreName: "Salsa",
           album: "Álbum 3",
           status: "Eliminado",
         },
@@ -289,6 +305,7 @@ export default {
       this.formData = {
         songName: "",
         artistName: "",
+        genreName: "",
         album: "",
         url: "",
         status: "Activo",
@@ -313,6 +330,7 @@ export default {
           </div>
           <p><strong>Nombre de la Canción:</strong> <br>${song.songName}</p>
           <p><strong>Nombre del Artista:</strong><br> ${song.artistName}</p>
+           <p><strong>Género Musical:</strong><br> ${song. genreName}</p>
           <p><strong>Álbum:</strong><br> ${song.album}</p>
           <p><strong>URL:</strong><br> <a href="${song.url}" target="_blank">${song.url}</a></p>
           <p><strong>Estado:</strong><br> ${song.status}</p>
@@ -370,13 +388,16 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .form-group {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center; 
   margin-bottom: 15px;
+  width: 70%;
 }
 
 .form-group label {
@@ -423,6 +444,7 @@ button[type="submit"]:hover {
   border-radius: 10px;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
   margin-top: 20px; /*con esto  puedo   bajar mas la tabla   para que haya espacio  entre el modal de crear y el cuadro */
+  overflow-x: auto;
 }
 
 table {
@@ -446,6 +468,8 @@ th {
   padding: 10px;
   border-radius: 5px;
   display: inline-block;
+  max-width: 250px;
+  word-wrap: break-word;
 }
 .cell:hover {
   background-color: white;
@@ -534,7 +558,7 @@ th {
   box-shadow: 5px 2px 3px 1px rgba(0, 0, 0, 0.164);
   padding: 5px 10px;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 530px;
   width: 380px;
   border-radius: 10px;
   text-align: center;
@@ -543,7 +567,7 @@ th {
 .custom-form-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  
 }
 
 .custom-upload-label {

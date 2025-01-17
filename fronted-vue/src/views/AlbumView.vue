@@ -41,6 +41,10 @@
                   <input type="text" v-model="formData.artistName" required />
                 </div>
                 <div class="form-group">
+  <label for="genreName">Género Musical:</label>
+  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
+</div>
+                <div class="form-group">
                   <label for="integrantes">Integrantes:</label>
                   <input type="text" v-model="formData.album" required />
                 </div>
@@ -86,6 +90,10 @@
                   <input type="text" v-model="formData.artistName" required />
                 </div>
                 <div class="form-group">
+  <label for="genreName">Género Musical:</label>
+  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
+</div>
+                <div class="form-group">
                   <label for="integrantes">Integrantes:</label>
                   <input type="text" v-model="formData.album" required />
                 </div>
@@ -119,9 +127,10 @@
           <thead>
             <tr>
               <th><div class="cell">#</div></th>
-              <th><div class="cell">Logo</div></th>
+              <th><div class="cell">Foto</div></th>
               <th><div class="cell">Nombre del Álbum</div></th>
               <th><div class="cell">Nombre del Grupo</div></th>
+              <th><div class="cell">Género Musical<br></div></th>
               <th><div class="cell">Integrantes</div></th>
               <th><div class="cell">URL</div></th>
               <th><div class="cell">Estado</div></th>
@@ -144,6 +153,9 @@
               <td>
                 <div class="cell">{{ song.artistName }}</div>
               </td>
+              <td>
+  <div class="cell">{{ song.genreName }}</div>
+</td>
               <td>
                 <div class="cell">{{ song.album }}</div>
               </td>
@@ -202,6 +214,7 @@ export default {
       formData: {
         albumName: "",
         artistName: "",
+        genreName: "",
         album: "",
         url: "",
         status: "Activo",
@@ -209,25 +222,28 @@ export default {
       },
       songs: [
         {
-          photo: "path/to/photo1.png",
+          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6F06N76xMfRCfoAlJLu0YWvOUGpGZhJwJkA&s",
           songName: "Álbum 1",
           artistName: "Nombre del Grupo 1",
+          genreName: "Bachata",
           album: "Integrante 1",
           url: "https://example.com/song1",
           status: "Activo",
         },
         {
-          photo: "path/to/photo2.png",
+          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpAHQLwZMvxfgcRV_rBRSdoq4vk89dMKpqiQ&s",
           songName: "Álbum 2",
           artistName: "Nombre del Grupo 2",
+          genreName: "Pop",
           album: "Integrante 1",
           url: "https://example.com/song2",
           status: "Activo",
         },
         {
-          photo: "path/to/photo3.png",
+          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1dhWaghhisEV0ZIrN3GtzfYTpCtVKiXOHo95--tvKRKQ2dEjpelqibFVAXtS1UXKsHTg&usqp=CAU",
           songName: " Álbum  3",
           artistName: "Nombre del Grupo 3",
+          genreName: "Salsa",
           album: "Integrante 1",
           url: "https://example.com/song3",
           status: "Eliminado",
@@ -305,6 +321,7 @@ export default {
       this.formData = {
         songName: "",
         artistName: "",
+        genreName: "",
         album: "",
         url: "",
         status: "Activo",
@@ -329,6 +346,7 @@ export default {
           </div>
           <p><strong>Nombre del  Álbum :</strong> ${song.songName}</p>
           <p><strong>Nombre del Grupo:</strong> ${song.artistName}</p>
+          <p><strong>Género Musical:</strong><br> ${song. genreName}</p>
           <p><strong>Integrantes:</strong> ${song.album}</p>
           <p><strong>URL:</strong> <a href="${song.url}" target="_blank">${song.url}</a></p>
           <p><strong>Estado:</strong> ${song.status}</p>
@@ -384,13 +402,16 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .form-group {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center; 
   margin-bottom: 15px;
+  width: 70%;
 }
 
 .form-group label {
@@ -437,6 +458,7 @@ button[type="submit"]:hover {
   border-radius: 10px;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
   margin-top: 20px; /*con esto  puedo   bajar mas la tabla   para que haya espacio  entre el modal de crear y el cuadro */
+  overflow-x: auto;
 }
 
 table {
@@ -460,6 +482,8 @@ th {
   padding: 10px;
   border-radius: 5px;
   display: inline-block;
+  max-width: 250px;
+  word-wrap: break-word;
 }
 .cell:hover {
   background-color: white;
@@ -546,7 +570,7 @@ th {
   box-shadow: 5px 2px 3px 1px rgba(0, 0, 0, 0.164);
   padding: 5px 10px;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 530px;
   width: 380px;
   border-radius: 10px;
   text-align: center;
@@ -555,7 +579,7 @@ th {
 .custom-form-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+ 
 }
 
 .custom-upload-label {
