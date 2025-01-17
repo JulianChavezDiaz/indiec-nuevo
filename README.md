@@ -42,3 +42,4 @@ git clone https://github.com/JulianChavezDiaz/indiec-nuevo.git
 email: admin@yavirac.edu.ec
 
 contraseña: admin123
+JulianChavezDiaz
