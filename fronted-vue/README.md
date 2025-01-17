@@ -5,15 +5,25 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### iniciar
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## subir cambios 
+git add .
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+git commit -m "nombre del cambio "
+
+git push
+
+
+
+# clonar  git bash here
+
+git clone https://github.com/JulianChavezDiaz/indiec-nuevo.git
+
+
+## bajarse los cambios
+git pull
+
