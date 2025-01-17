@@ -14,10 +14,7 @@
         <router-link to="/perfil">
           <i class="bx bx-user"></i> Perfil
         </router-link>
-        
-        <router-link to="/genero-musical">
-          <i class="bx bx-music"></i> Género musical
-        </router-link>
+
         <router-link to="/grupo">
           <i class="bx bx-group"></i> Grupo musical
         </router-link>
@@ -30,9 +27,7 @@
         <router-link to="/maneger">
           <i class="bx bx-user-voice"></i> Manager
         </router-link>
-        <router-link to="/disqueraz">
-          <i class="bx bx-disc"></i> Disquera
-        </router-link>
+
         <router-link to="/eventos">
           <i class="bx bx-calendar"></i> Eventos
         </router-link>

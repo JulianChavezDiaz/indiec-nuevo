@@ -3,11 +3,9 @@ import InformacionView from '@/views/InformacionView.vue'
 import DashboardView from '@/views/DashboardView.vue'
 import LoginViev from '@/views/LoginViev.vue'
 import RegistreView from '@/views/RegistreView.vue'
-import GeneroMusicaView from '@/views/GeneroMusicaView.vue'
 import PerfilArtistaView from '@/views/PerfilArtistaView.vue'
 import GrupoMusicalView from '@/views/GrupoMusicalView.vue'
 import AlbumView from '@/views/AlbumView.vue'
-import DisquerazView from '@/views/DisquerazView.vue'
 import ManegerView from '@/views/ManegerView.vue'
 import EventosView from '@/views/EventosView.vue'
 import MusicaView from '@/views/MusicaView.vue'
@@ -34,13 +32,13 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: DashboardView,
-   /*  meta: { requiresAuth: true }*/
+    /*  meta: { requiresAuth: true }*/
   },// perfil artista
   {
     path: '/perfil',
     name: 'perfil artista',
     component: PerfilArtistaView,
-       /*  meta: { requiresAuth: true }*/
+    /*  meta: { requiresAuth: true }*/
 
   }
   ,//grupo musical
@@ -48,25 +46,15 @@ const routes = [
     path: '/grupo',
     name: 'grupo musical',
     component: GrupoMusicalView,
-       /*  meta: { requiresAuth: true }*/
-
-  }
-  ,
-  // genero musical
-  {
-    path: '/genero-musical',
-    name: 'genero-musical',
-    component: GeneroMusicaView,
-       /*  meta: { requiresAuth: true }*/
+    /*  meta: { requiresAuth: true }*/
 
   }
   ,  // Album
-
   {
     path: '/album',
     name: 'album',
     component: AlbumView,
-       /*  meta: { requiresAuth: true }*/
+    /*  meta: { requiresAuth: true }*/
 
   }
   ,// Maneger
@@ -74,22 +62,16 @@ const routes = [
     path: '/maneger',
     name: 'maneger',
     component: ManegerView,
-       /*  meta: { requiresAuth: true }*/
-
-  },//disqueraz
-  {
-    path: '/disqueraz',
-    name: 'disqueraz',
-    component: DisquerazView,
-       /*  meta: { requiresAuth: true }*/
+    /*  meta: { requiresAuth: true }*/
 
   }
+
   ,//Eventos
   {
     path: '/eventos',
     name: 'eventos',
     component: EventosView,
-       /*  meta: { requiresAuth: true }*/
+    /*  meta: { requiresAuth: true }*/
 
   }
   ,//musica
@@ -97,7 +79,7 @@ const routes = [
     path: '/musica',
     name: 'musica',
     component: MusicaView,
-       /*  meta: { requiresAuth: true }*/
+    /*  meta: { requiresAuth: true }*/
 
   }
 
@@ -115,9 +97,9 @@ router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token');
 
   if (requiresAuth && !token) {
-    next('/login'); 
+    next('/login');
   } else {
-    next(); 
+    next();
   }
 });
 

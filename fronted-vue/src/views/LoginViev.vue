@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Swal from "sweetalert2";
 
 export default {
@@ -41,36 +40,38 @@ export default {
     return {
       correo: "",
       password: "",
-      emailError: "", // Add this to store email validation error message
+      emailError: "",
+      // Datos quemados para autenticación
+      dummyUser: {
+        correo: "admin@yavirac.edu.ec",
+        password: "admin123",
+      },
     };
   },
   methods: {
     validateEmail() {
-      // Regex to match email ending with @yavirac.edu.ec
       const emailPattern = /^[a-zA-Z0-9._%+-]+@yavirac\.edu\.ec$/;
       this.emailError = emailPattern.test(this.correo)
         ? ""
         : "El correo debe terminar en @yavirac.edu.ec";
     },
-    async login() {
-      // Validate email before proceeding
+    login() {
       this.validateEmail();
 
       if (this.emailError) {
         Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: this.emailError
+          icon: "error",
+          title: "Error",
+          text: this.emailError,
         });
         return;
       }
 
-      try {
-        const response = await axios.post("http://localhost:3000/login", {
-          correo: this.correo,
-          password: this.password,
-        });
-        localStorage.setItem("token", response.data.token); // Guarda el token en el almacenamiento local
+      // Verificación con datos quemados
+      if (
+        this.correo === this.dummyUser.correo &&
+        this.password === this.dummyUser.password
+      ) {
         Swal.fire({
           icon: "success",
           title: "¡Ingreso exitoso!",
@@ -79,15 +80,14 @@ export default {
           showConfirmButton: false,
         });
         setTimeout(() => {
-          this.$router.push("/dashboard"); // Redirige a la vista protegida
+          localStorage.setItem("token", "dummy-token"); // Simula guardar un token
+          this.$router.push("/dashboard");
         }, 2000);
-      } catch (error) {
+      } else {
         Swal.fire({
           icon: "error",
           title: "Error al iniciar sesión",
-          text:
-            error.response.data.message ||
-            "Ha ocurrido un error, por favor intenta nuevamente.",
+          text: "Correo o contraseña incorrectos. Intenta nuevamente.",
         });
       }
     },
