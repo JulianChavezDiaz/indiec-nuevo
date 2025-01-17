@@ -47,6 +47,10 @@
                   <input type="text" v-model="formData.recordlabelName" required placeholder="ingrese el nombre" />
                 </div>
                 <div class="form-group">
+  <label for="genreName">Género Musical:</label>
+  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
+</div>
+                <div class="form-group">
                   <label for="descriptiontName">Descripcion:</label>
                   <input type="text" v-model="formData.descriptiontName" required placeholder="Ingrese descripcion" />
                 </div>
@@ -92,6 +96,10 @@
                   <input type="text" v-model="formData.recordlabelName" required placeholder="ingrese el nombre" />
                 </div>
                 <div class="form-group">
+  <label for="genreName">Género Musical:</label>
+  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
+</div>
+                <div class="form-group">
                   <label for="descriptiontName">Descripcion:</label>
                   <input type="text" v-model="formData.descriptiontName" required  placeholder="Ingrese descripcion" />
                 </div>
@@ -131,6 +139,7 @@
               <th><div class="cell">#</div></th>
               <th><div class="cell">Foto</div></th>
               <th><div class="cell">Nombre del <br> Grupo Musical</div></th>
+              <th><div class="cell">Género Musical<br></div></th>
               <th><div class="cell">Descripción</div></th>
               <th><div class="cell">Plataforma</div></th>
               <th><div class="cell">URL</div></th>
@@ -151,6 +160,9 @@
               <td>
                 <div class="cell">{{ song.recordlabelName }}</div>
               </td>
+              <td>
+  <div class="cell">{{ song.genreName }}</div>
+</td>
               <td>
                 <div class="cell">{{ song.descriptiontName }}</div>
               </td>
@@ -211,6 +223,7 @@ export default {
       searchQuery: "",
       formData: {
         recordlabelName: "",
+        genreName: "",
         descriptiontName: "",
         platform: "",
         url: "",
@@ -219,16 +232,18 @@ export default {
       },
       songs: [
         {
-          photo: "https://w7.pngwing.com/pngs/766/288/png-transparent-logo-fairy-tail-symbol-fairy-tail-emblem-text-heart-thumbnail.png",
+          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT35JAXVv5xGOiUnS3b0o9z1ckav3zikTHZXA&s",
           recordlabelName: "Disquera 1",
+          genreName:"Bachata",
           descriptiontName: "Descripcion 1",
           platform: "Plataforma 1",
           url: "https://youtube.com/song1",
           status: "Activo",
         },
         {
-          photo: "https://w7.pngwing.com/pngs/766/288/png-transparent-logo-fairy-tail-symbol-fairy-tail-emblem-text-heart-thumbnail.png",
+          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiogmYyt7eCSoj7IQdjkSVbOfu9N0pTR2y-w&s",
           recordlabelName: "Disquera 2",
+          genreName:"Pop",
           descriptiontName: "Descripcion 2",
           platform: "Plataforma 2",
           url: "https://youtube.com/song2",
@@ -302,6 +317,7 @@ export default {
     resetFormData() {
       this.formData = {
         recordlabelName: "",
+        genreName:"",
         descriptiontName: "",
         platform: "",
         url: "",
@@ -326,6 +342,7 @@ export default {
             <img src="${song.photo}" alt="Foto de ${song.recordlabelName}" style="max-width: 100%; height: auto; ">
           </div>
           <p><strong>Nombre del Grupo Musical:</strong><br> ${song.recordlabelName}</p>
+          <p><strong>Género Musical:</strong><br> ${song. genreName}</p>
           <p><strong>Descripcion:</strong><br> ${song.descriptiontName}</p>
           <p><strong>Plataforma:</strong><br> ${song.platform}</p>
           <p><strong>URL:</strong><br> <a href="${song.url}" target="_blank">${song.url}</a></p>
@@ -384,13 +401,21 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+
+  
 }
 
 .form-group {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center; 
   margin-bottom: 15px;
+  width: 70%;
+
+  
+  
 }
 
 .form-group label {
@@ -398,6 +423,7 @@ form {
   margin-right: 10px;
   font-weight: bold;
   text-align: right;
+
 }
 
 .form-group input {
@@ -437,6 +463,7 @@ button[type="submit"]:hover {
   border-radius: 10px;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
   margin-top: 20px; 
+  overflow-x: auto;
 }
 
 table {
@@ -460,6 +487,10 @@ th {
   padding: 10px;
   border-radius: 5px;
   display: inline-block;
+  max-width: 250px;
+  word-wrap: break-word;
+
+  
 }
 .cell:hover {
   background-color: white;
@@ -547,7 +578,7 @@ th {
   box-shadow: 5px 2px 3px 1px rgba(0, 0, 0, 0.164);
   padding: 5px 10px;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 530px;
   width: 380px;
   border-radius: 10px;
   text-align: center;
@@ -556,7 +587,7 @@ th {
 .custom-form-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  
 }
 
 .custom-upload-label {

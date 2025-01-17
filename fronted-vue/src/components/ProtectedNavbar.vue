@@ -14,7 +14,6 @@
         <router-link to="/perfil">
           <i class="bx bx-user"></i> Perfil
         </router-link>
-
         <router-link to="/grupo">
           <i class="bx bx-group"></i> Grupo musical
         </router-link>

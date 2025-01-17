@@ -18,7 +18,31 @@
     </div>
             <MyModal :isVisible="showCreateModal" @close="closeModals">
               <form @submit.prevent="handleCreate">
+
                 <h2>Agregar Manager</h2>
+
+                <h2>Crear Manager</h2>
+                 <!-- Subir Imagen -->
+                 <div class="form-group custom-form-group">
+                  <label for="imagen" class="upload-label custom-upload-label">
+                    <i class="bx bx-check"></i> Subir Imagen
+                  </label>
+                  <input
+                    type="file"
+                    id="imagen"
+                    class="custom-upload-input"
+                    @change="handleFileUpload"
+                    accept="image/*"
+                  />
+                </div>
+                <!-- Vista previa de la imagen seleccionada -->
+                <div v-if="imagePreview" class="image-preview custom-image-preview">
+                  <img
+                    :src="imagePreview"
+                    alt="Vista previa de la imagen"
+                    class="custom-preview-img"
+                  />
+                </div>
                 <div class="form-group">
                   <label for="nombre">Nombres:</label>
                   <input type="text" v-model="formData.firstName" required />
@@ -45,10 +69,7 @@
                     style="background-color: #0000002a"
                   />
                 </div>
-                <div class="form-group">
-                  <label for="foto">Foto:</label>
-                  <input type="text" v-model="formData.photo" />
-                </div>
+               
                 <div class="button-container">
                   <button type="submit">Guardar</button>
                 </div>
@@ -59,6 +80,27 @@
             <MyModal :isVisible="showEditModal" @close="closeModals">
               <form @submit.prevent="handleEdit">
                 <h2>Editar Manager</h2>
+                <!-- Subir Imagen en edición -->
+                <div class="form-group custom-form-group">
+                  <label for="edit-imagen" class="upload-label custom-upload-label">
+                    <i class="bx bx-check"></i> Cambiar Imagen
+                  </label>
+                  <input
+                    type="file"
+                    id="edit-imagen"
+                    class="custom-upload-input"
+                    @change="handleEditFileUpload"
+                    accept="image/*"
+                  />
+                </div>
+                <!-- Vista previa de la imagen seleccionada en edición -->
+                <div v-if="editImagePreview" class="image-preview custom-image-preview">
+                  <img
+                    :src="editImagePreview"
+                    alt="Vista previa de la imagen"
+                    class="custom-preview-img"
+                  />
+                </div>
                 <div class="form-group">
                   <label for="edit-nombre">Nombres:</label>
                   <input
@@ -105,10 +147,7 @@
                     style="background-color: #0000002a"
                   />
                 </div>
-                <div class="form-group">
-                  <label for="edit-foto">Foto:</label>
-                  <input type="text" id="edit-foto" v-model="editFormData.photo" />
-                </div>
+               
                 <div class="button-container">
                   <button type="submit">Guardar Cambios</button>
                 </div>
@@ -232,7 +271,7 @@ export default {
           email: "Alexander@ya.ed",
           gender: "Masculino",
           status: "Activo",
-          photo: "https://i.pinimg.com/736x/a2/56/51/a256518753a01a4fe95d1bfd35b63317.jpg",
+          photo: "https://wallpapers.com/images/featured/fotos-de-perfil-xj8jigxkai9jag4g.jpg",
         },
         {
           firstName: "Jane",
@@ -240,7 +279,7 @@ export default {
           email: "Alexander@ya.ed",
           gender: "Femenino",
           status: "Inactivo",
-          photo: "https://i.pinimg.com/736x/a2/56/51/a256518753a01a4fe95d1bfd35b63317.jpg",
+          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeiGQCoJHB8ls2xOC3gE8iEuF81qWCe_V9zA&s",
         },
         {
           firstName: "Alexander",
@@ -248,7 +287,7 @@ export default {
           email: "Alexander@ya.ed",
           gender: "Masculino",
           status: "Activo",
-          photo: "https://i.pinimg.com/736x/a2/56/51/a256518753a01a4fe95d1bfd35b63317.jpg",
+          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcNwi94JURMqWDKYEYQaobN4WaP4tNkx3oNQ&s",
         },
       ],
     };
@@ -396,13 +435,16 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .form-group {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center; 
   margin-bottom: 15px;
+  width: 70%;
 }
 
 .form-group label {
@@ -557,33 +599,53 @@ th {
   box-shadow: 5px 2px 3px 1px rgba(0, 0, 0, 0.164);
   padding: 5px 10px;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 530px;
   width: 380px;
   border-radius: 10px;
   text-align: center;
 }
 
-/* Estilos de la vista previa de la imagen */
-.image-preview {
-  margin: 80px;
-}
-.image-preview img {
-  max-width: 50%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
-}
-/* Estilos del botón para subir imagen */
-.form-group1 {
-  display: inline-block;
-  background-color: #067b80;
-  color: white;
-  padding: 6px;
-  border-radius: 13px;
-  cursor: pointer;
-  text-align: center;
+
+
+
+
+.custom-form-group {
+  display: flex;
+  flex-direction: column;
+  
 }
 
+.custom-upload-label {
+  display: flex;
+  align-items: center;
+  background-color: #3c8dbc;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.custom-upload-input {
+  display: none;
+}
+
+.custom-image-preview {
+  margin-top: 10px;
+}
+
+.custom-preview-img {
+  max-width: 80%;
+  max-height: 50px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.song-photo {
+  max-width: 70px;
+  max-height: 50px;
+  border-radius: 4px;
+  object-fit: cover;
+}
 
 .buscar {
 }

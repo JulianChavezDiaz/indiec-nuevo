@@ -75,58 +75,5 @@ export default {
   text-align: center;
 }
 
-.chart-container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-around;
-  /* Alineación de los gráficos */
-}
 
-.chart-item {
-  width: 50%;
-  /* Ajusta el tamaño de cada gráfico */
-}
-
-.larger-chart {
-  width: 50%;
-  /* Ajusta el tamaño del gráfico de líneas para que sea más grande */
-}
-
-canvas {
-  width: 100% !important;
-  /* Asegura que el canvas llene su contenedor */
-  height: auto !important;
-  /* Asegura que el canvas mantenga la proporción */
-}
-
-.table-container {
-  margin-top: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  padding: 10px;
-  width: 80%;
-  /* Ajusta el tamaño de la tabla */
-  max-width: 800px;
-  /* Ajusta el tamaño máximo de la tabla */
-  margin-left: auto;
-  margin-right: auto;
-  /* Centra horizontalmente */
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-th {
-  background-color: #f2f2f2;
-}
 </style>
