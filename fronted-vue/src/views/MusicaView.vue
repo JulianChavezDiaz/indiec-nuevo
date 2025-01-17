@@ -5,12 +5,20 @@
     <div class="content">
       <div class="header">
         <div id="capa-padre">
-          <h1>Canción</h1>
-          <div id="app">
-            <button @click="showCreateModal = true">Crear Canción</button>
+          <div class="container text-center">
+  <div class="row">
+    <div class="col">
+      <h1>Cancion</h1>
+    </div>
+    <div class="col">
+      <div id="app">
+        <button @click="showCreateModal = true">Agregar Cancion</button>
+      </div>
+    </div>
+  </div>
             <MyModal :isVisible="showCreateModal" @close="showCreateModal = false">
               <form v-if="!isEditing" @submit.prevent="handleCreate">
-                <h2>Crear Canción</h2>
+                <h2>Agregar Canción</h2>
                 <!-- Subir Imagen -->
                 <div class="form-group custom-form-group">
                   <label for="imagen" class="upload-label custom-upload-label">

@@ -5,12 +5,20 @@
     <div class="content">
       <div class="header">
         <div id="capa-padre">
-          <h1>Manager</h1>
-          <div id="app">
-            <button @click="showCreateModal = true">Crear Manager</button>
+          <div class="container text-center">
+  <div class="row">
+    <div class="col">
+      <h1>Manager</h1>
+    </div>
+    <div class="col">
+      <div id="app">
+        <button @click="showCreateModal = true">Agregar Manager</button>
+      </div>
+    </div>
+    </div>
             <MyModal :isVisible="showCreateModal" @close="closeModals">
               <form @submit.prevent="handleCreate">
-                <h2>Crear Manager</h2>
+                <h2>Agregar Manager</h2>
                 <div class="form-group">
                   <label for="nombre">Nombres:</label>
                   <input type="text" v-model="formData.firstName" required />

@@ -5,9 +5,19 @@
     <div class="content">
       <div class="header">
         <div id="capa-padre">
-          <h1>Grupo Musical</h1>
+          <div class="container text-center">
+  <div class="row">
+    <div class="col">
+      <h1>Grupo Musical</h1>
+    </div>
+    <div class="col">
+      <div id="app">
+        <button @click="showCreateModal = true">Crear Grupo</button>
+      </div>
+    </div>
+  </div>
+          </div>
           <div id="app">
-            <button @click="showCreateModal = true">Crear Grupo</button>
             <MyModal :isVisible="showCreateModal" @close="showCreateModal = false">
               <form v-if="!isEditing" @submit.prevent="handleCreate">
                 <h2>Crear Grupo</h2>

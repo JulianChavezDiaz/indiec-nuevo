@@ -5,9 +5,15 @@
     <div class="content">
       <div class="header">
         <div id="capa-padre">
-          <h1>Eventos</h1>
-          <div id="app">
-            <button @click="showCreateModal = true">Crear Evento</button>
+          <div class="row">
+    <div class="col">
+      <h1>Eventos</h1>
+    </div>
+    <div class="col">
+      <div id="app">
+        <button @click="showCreateModal = true">Crear Evento</button>
+      </div>
+    </div>
             <MyModal :isVisible="showCreateModal" @close="showCreateModal = false">
               <form v-if="!isEditing" @submit.prevent="handleCreate">
                 <h2>Crear Evento</h2>
