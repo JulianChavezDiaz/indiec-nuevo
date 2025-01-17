@@ -104,7 +104,6 @@
 
       
       <div class="button-container">
-        <button class="pdf">PDF</button>
         <button class="excel">EXCEL</button>
         <input
           type="text"
@@ -514,7 +513,7 @@ th {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.137);
 }
 
-.pdf,
+
 .excel,
 .buscar {
   padding: 5px 10px;
@@ -524,11 +523,6 @@ th {
   margin: 0 2px;
 }
 
-.pdf {
-  background-color: #dc3545;
-  color: #fff;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.137);
-}
 
 .excel {
   background-color: #28a745;
