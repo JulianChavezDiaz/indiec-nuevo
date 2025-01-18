@@ -30,7 +30,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("/public/img/fondo.png");
+  background-image: url("/public/img/fondo 2.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

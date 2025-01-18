@@ -11,6 +11,8 @@
       Cambiar Tema
     </button>
   </div>
+    <div class="img-01">
+    </div>
 </template>
 
 <script>
@@ -82,11 +84,14 @@ export default {
 }
 
 /* Contenedor del encabezado */
+
+
+/* Estilos del encabezado */
 #inicio {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("/public/img/fondo.png"); /* Imagen de fondo */
+  background-image: url("/public/img/fondo 2.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -115,10 +120,25 @@ export default {
 }
 
 /* Otros estilos */
+
+
+/* Estilos adicionales */
 .contenedor {
   height: 40vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.img-01{
+    background-image: url("/public/img/fondo1.png");
+    background-size: cover;
+    background-position: absolute;
+    background-repeat: no-repeat;
+    width: 587.49px;
+    height: 571.91px;
+    border-radius: 25px;
+    position:absolute;
+    left: calc(50% - 587.49px/2 + 455.24px);
+    top: calc(50% - 571.91px/2 + 221.95px);
+   }
 </style>

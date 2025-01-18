@@ -425,11 +425,13 @@ export default {
   color: #e0e0e0; /* Texto claro */
 }
 #capa-padre {
+  background-image: url("/public/img/fondo 2.png");
   background-color: aliceblue;
   border-radius: 20px;
   text-align: center;
   margin: 5px auto;
   padding: 10px;
+  color: white;
 }
 
 #app {
