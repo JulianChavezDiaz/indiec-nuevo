@@ -17,7 +17,18 @@
           </div>
         </div>
       </div>
-
+ <!-- Migajas de pan -->
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    
+    <li class="breadcrumb-item">
+      <router-link to="/dashboard">Incio</router-link>
+    </li>
+    <li class="breadcrumb-item">
+      <router-link to="/musica">Perfil</router-link>
+    </li>
+  </ol>
+</nav>
       <nav class="profile-nav">
         <ul>
           <li class="active">Acerca de</li>
@@ -203,13 +214,12 @@ button:hover {
   width: 800px;
   height: 250px;
   border-radius: 10px;
-  background-position: center center;
   /* Centra la imagen */
   background-repeat: no-repeat;
   /* Evita que la imagen se repita */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   /* Sombra suave para darle más profundidad */
-  margin-left: 80px;
+  
 }
 
 .profile-info {
@@ -285,7 +295,7 @@ button:hover {
   max-width: 800px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   animation: fadeIn 1.5s ease-out;
-  margin-left: 410px;
+  margin-left: 180px;
 }
 
 .profile-details-grid {
@@ -334,6 +344,7 @@ button:hover {
 
 .form-group {
   margin-bottom: 20px;
+  
 }
 
 .form-group label {
@@ -370,6 +381,38 @@ button:hover {
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 15px;
+  list-style: none;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  justify-content: center;
+
+}
+
+.breadcrumb-item {
+  font-size: 16px;
+  font-weight: 500;
+  color: #007bff;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #0aa5a9;
+  padding: 5px 8px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+  background-color: #067b80;
+  color: #ffffff;
 }
 
 

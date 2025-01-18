@@ -147,7 +147,18 @@
         </div>
       </div>
     </div>
-
+   <!-- Migajas de pan -->
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    
+    <li class="breadcrumb-item">
+      <router-link to="/dashboard">Incio</router-link>
+    </li>
+    <li class="breadcrumb-item">
+      <router-link to="/musica">Música</router-link>
+    </li>
+  </ol>
+</nav>
       <!-- Botones para exportar y buscar -->
       <div class="button-container" :class="theme">
         <button class="excel">EXCEL</button>
@@ -687,4 +698,39 @@ th {
 }
 .buscar {
 }
+
+
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 15px;
+  list-style: none;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  justify-content: center;
+
+}
+
+.breadcrumb-item {
+  font-size: 16px;
+  font-weight: 500;
+  color: #007bff;
+}
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #0aa5a9;
+  padding: 5px 8px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+  background-color: #067b80;
+  color: #ffffff;
+}
+
+
 </style>
