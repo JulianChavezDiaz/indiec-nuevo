@@ -1,23 +1,26 @@
 <template>
   <div>
     <ProtectedNavbar />
-    
-    <div class="content">
-      <div class="header">
+
+    <div :class="['content', theme]">
+      <div class="header" :class="theme">
         <div id="capa-padre">
           <div class="row">
-    <div class="col">
-      <h1>Eventos</h1>
-    </div>
-    <div class="col">
-      <div id="app">
-        <button @click="showCreateModal = true">Crear Evento</button>
-      </div>
-    </div>
+            <div class="col">
+              <h1>Eventos</h1>
+            </div>
+            <div class="col">
+              <div id="app">
+                <button @click="showCreateModal = true">Crear Evento</button>
+                <button @click="toggleTheme" class="theme-toggle" style="padding-left: 10px;margin-left: 50px;" :class="theme">
+                  <i class="bi bi-moon"></i>
+                </button>
+              </div>
+            </div>
             <MyModal :isVisible="showCreateModal" @close="showCreateModal = false">
-              <form v-if="!isEditing" @submit.prevent="handleCreate">
+              <form v-if="!isEditing" @submit.prevent="handleCreate" :class="theme">
                 <h2>Crear Evento</h2>
-                
+
                 <div class="form-group custom-form-group">
                   <label for="imagen" class="upload-label custom-upload-label">
                     <i class="bx bx-check"></i> Subir Imagen
@@ -30,7 +33,7 @@
                     accept="image/*"
                   />
                 </div>
-                
+
                 <div v-if="imagePreview" class="image-preview custom-image-preview">
                   <img
                     :src="imagePreview"
@@ -43,9 +46,14 @@
                   <input type="text" v-model="formData.eventName" required />
                 </div>
                 <div class="form-group">
-  <label for="genreName">Género Musical:</label>
-  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
-</div>
+                  <label for="genreName">Género Musical:</label>
+                  <input
+                    type="text"
+                    v-model="formData.genreName"
+                    required
+                    placeholder="Ingrese el género musical"
+                  />
+                </div>
                 <div class="form-group">
                   <label for="description">Descripción:</label>
                   <input type="text" v-model="formData.description" required />
@@ -72,16 +80,20 @@
                 </div>
                 <div class="form-group">
                   <label for="artists">Artistas:</label>
-                  <textarea v-model="formData.artists" placeholder="Ingrese los nombres de los artistas, separados por comas" required></textarea>
+                  <textarea
+                    v-model="formData.artists"
+                    placeholder="Ingrese los nombres de los artistas, separados por comas"
+                    required
+                  ></textarea>
                 </div>
                 <div class="button-container">
                   <button type="submit">Guardar</button>
                 </div>
               </form>
 
-              <form v-else @submit.prevent="handleEdit">
+              <form v-else @submit.prevent="handleEdit" :class="theme">
                 <h2>Editar Evento</h2>
-                
+
                 <div class="form-group custom-form-group">
                   <label for="edit-imagen" class="upload-label custom-upload-label">
                     <i class="bx bx-check"></i> Cambiar Imagen
@@ -94,7 +106,7 @@
                     accept="image/*"
                   />
                 </div>
-                
+
                 <div v-if="editImagePreview" class="image-preview custom-image-preview">
                   <img
                     :src="editImagePreview"
@@ -107,9 +119,14 @@
                   <input type="text" v-model="formData.eventName" required />
                 </div>
                 <div class="form-group">
-  <label for="genreName">Género Musical:</label>
-  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
-</div>
+                  <label for="genreName">Género Musical:</label>
+                  <input
+                    type="text"
+                    v-model="formData.genreName"
+                    required
+                    placeholder="Ingrese el género musical"
+                  />
+                </div>
                 <div class="form-group">
                   <label for="description">Descripción:</label>
                   <input type="text" v-model="formData.description" required />
@@ -136,7 +153,11 @@
                 </div>
                 <div class="form-group">
                   <label for="artists">Artistas:</label>
-                  <textarea v-model="formData.artists" placeholder="Ingrese los nombres de los artistas, separados por comas" required></textarea>
+                  <textarea
+                    v-model="formData.artists"
+                    placeholder="Ingrese los nombres de los artistas, separados por comas"
+                    required
+                  ></textarea>
                 </div>
                 <div class="button-container">
                   <button type="submit">Guardar Cambios</button>
@@ -147,7 +168,6 @@
         </div>
       </div>
 
-      
       <div class="button-container">
         <button class="excel">EXCEL</button>
         <input
@@ -158,26 +178,27 @@
         />
       </div>
 
-      
       <div class="table-container">
         <table>
           <thead>
             <tr>
-              <th><div class="cell">#</div></th>
-              <th><div class="cell">Foto</div></th>
-              <th><div class="cell">Nombre del Evento</div></th>
-              <th><div class="cell">Género Musical<br></div></th>
-              <th><div class="cell">Descripción</div></th>
-              <th><div class="cell">Ubicación</div></th>
-              <th><div class="cell">Fecha</div></th>
-              <th><div class="cell">Contacto</div></th>
-              <th><div class="cell">Capacidad</div></th>
-              <th><div class="cell">Artistas</div></th>
-              <th><div class="cell">Estado</div></th>
-              <th><div class="cell">Acciones</div></th>
+              <th :class="theme"><div class="cell">#</div></th>
+              <th :class="theme"><div class="cell">Foto</div></th>
+              <th :class="theme"><div class="cell">Nombre del Evento</div></th>
+              <th :class="theme">
+                <div class="cell">Género Musical<br /></div>
+              </th>
+              <th :class="theme"><div class="cell">Descripción</div></th>
+              <th :class="theme"><div class="cell">Ubicación</div></th>
+              <th :class="theme"><div class="cell">Fecha</div></th>
+              <th :class="theme"><div class="cell">Contacto</div></th>
+              <th :class="theme"><div class="cell">Capacidad</div></th>
+              <th :class="theme"><div class="cell">Artistas</div></th>
+              <th :class="theme"><div class="cell">Estado</div></th>
+              <th :class="theme"><div class="cell">Acciones</div></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody :class="theme">
             <tr v-for="(event, index) in filteredEvents" :key="index">
               <td>
                 <div class="cell">{{ index + 1 }}</div>
@@ -191,8 +212,8 @@
                 <div class="cell">{{ event.eventName }}</div>
               </td>
               <td>
-  <div class="cell">{{ event.genreName }}</div>
-</td>
+                <div class="cell">{{ event.genreName }}</div>
+              </td>
               <td>
                 <div class="cell">{{ event.description }}</div>
               </td>
@@ -211,7 +232,9 @@
               <td>
                 <div class="cell">
                   <div class="scroll-container">
-                    <div v-for="artist in event.artistsList" :key="artist">{{ artist }}</div>
+                    <div v-for="artist in event.artistsList" :key="artist">
+                      {{ artist }}
+                    </div>
                   </div>
                 </div>
               </td>
@@ -252,11 +275,24 @@
 import ProtectedNavbar from "../components/ProtectedNavbar.vue";
 import MyModal from "../components/Modal.vue";
 import Swal from "sweetalert2";
+import { ref } from "vue";
 
 export default {
   components: {
     ProtectedNavbar,
     MyModal,
+  },
+  setup() {
+    // Variable que controla el tema
+    const theme = ref(localStorage.getItem("theme") || "light");
+
+    // Método para alternar entre claro y oscuro
+    const toggleTheme = () => {
+      theme.value = theme.value === "light" ? "dark" : "light";
+      localStorage.setItem("theme", theme.value); // Guardar en localStorage
+    };
+
+    return { theme, toggleTheme };
   },
   data() {
     return {
@@ -271,8 +307,8 @@ export default {
         url: "",
         contact: "",
         capacity: "",
-        artists: "", 
-        photo: "", 
+        artists: "",
+        photo: "",
       },
       events: [
         {
@@ -286,7 +322,8 @@ export default {
           capacity: 5000,
           artists: "The Rockers, The Bandits",
           artistsList: ["The Rockers", "The Bandits"],
-          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1GMNYbY19i8wfENiGt6brnICTDjz5Rllhjw&s",
+          photo:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1GMNYbY19i8wfENiGt6brnICTDjz5Rllhjw&s",
           status: "Activo",
         },
         {
@@ -314,14 +351,15 @@ export default {
           capacity: 1000,
           artists: "Artistas Emergentes, Galería Arte",
           artistsList: ["Artistas Emergentes", "Galería Arte"],
-          photo: "https://i0.wp.com/evemuseografia.com/wp-content/uploads/2020/01/EVE06012020-1.jpg?fit=1170%2C613&ssl=1",
+          photo:
+            "https://i0.wp.com/evemuseografia.com/wp-content/uploads/2020/01/EVE06012020-1.jpg?fit=1170%2C613&ssl=1",
           status: "Activo",
-        }
+        },
       ],
       isEditing: false,
       editIndex: null,
-      imagePreview: null, 
-      editImagePreview: null, 
+      imagePreview: null,
+      editImagePreview: null,
     };
   },
   computed: {
@@ -358,27 +396,33 @@ export default {
       this.formData.photo = this.editImagePreview;
     },
     handleCreate() {
-      const newEvent = { ...this.formData, artistsList: this.formData.artists.split(',').map(a => a.trim()) };
+      const newEvent = {
+        ...this.formData,
+        artistsList: this.formData.artists.split(",").map((a) => a.trim()),
+      };
       this.events.push(newEvent);
       this.showCreateModal = false;
       this.resetFormData();
-      this.imagePreview = null; 
+      this.imagePreview = null;
       Swal.fire("¡Éxito!", "El Evento ha sido creado exitosamente.", "success");
     },
     startEditing(event) {
       this.isEditing = true;
-      this.formData = { ...event, artists: event.artistsList.join(', ') };
+      this.formData = { ...event, artists: event.artistsList.join(", ") };
       this.editIndex = this.events.indexOf(event);
       this.showCreateModal = true;
     },
     handleEdit() {
       if (this.editIndex !== null) {
-        const updatedEvent = { ...this.formData, artistsList: this.formData.artists.split(',').map(a => a.trim()) };
+        const updatedEvent = {
+          ...this.formData,
+          artistsList: this.formData.artists.split(",").map((a) => a.trim()),
+        };
         this.events.splice(this.editIndex, 1, updatedEvent);
         this.showCreateModal = false;
         this.isEditing = false;
         this.resetFormData();
-        this.editImagePreview = null; 
+        this.editImagePreview = null;
         Swal.fire("¡Éxito!", "El Evento ha sido actualizado exitosamente.", "success");
       }
     },
@@ -392,8 +436,8 @@ export default {
         url: "",
         contact: "",
         capacity: "",
-        artists: "", 
-        photo: "", 
+        artists: "",
+        photo: "",
       };
     },
     deleteEvent(event) {
@@ -412,7 +456,7 @@ export default {
             <img src="${event.photo}" alt="Foto de ${event.eventName}" style="max-width: 100%; height: auto;">
           </div>
           <p><strong>Nombre del Evento:</strong> ${event.eventName}</p>
-           <p><strong>Género Musical:</strong><br> ${event. genreName}</p>
+           <p><strong>Género Musical:</strong><br> ${event.genreName}</p>
           <p><strong>Descripción:</strong> ${event.description}</p>
           <p><strong>Ubicación:</strong> ${event.location}</p>
           <p><strong>Fecha:</strong> ${event.date}</p>
@@ -441,6 +485,24 @@ export default {
 };
 </script>
 <style scoped>
+.content {
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+  display: flex;
+  flex-direction: column; /* Organización en columna */
+}
+/* Estilo para el tema claro */
+.light {
+  background-color: #ffffff; /* Fondo blanco */
+  color: #000000; /* Texto negro */
+}
+
+/* Estilo para el tema oscuro */
+.dark {
+  background-color: #555555; /* Fondo oscuro */
+  color: #e0e0e0; /* Texto claro */
+}
+
 #capa-padre {
   background-color: aliceblue;
   border-radius: 20px;
@@ -505,7 +567,7 @@ form {
   margin-top: 20px;
   background-color: aliceblue;
   padding: 10px;
-  border-radius:12px;
+  border-radius: 12px;
 }
 
 button[type="submit"] {
@@ -524,8 +586,11 @@ button[type="submit"]:hover {
 
 .table-container {
   padding: 20px;
+  background-color: aliceblue;
   border-radius: 10px;
-  margin-top: 20px; 
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+  margin-top: 20px; /*con esto  puedo   bajar mas la tabla   para que haya espacio  entre el modal de crear y el cuadro */
+  overflow-x: auto;
 }
 
 table {
@@ -534,8 +599,6 @@ table {
   background-color: aliceblue;
   box-shadow: 1px 2px 2px 5px rgba(0, 0, 0, 0.164);
   border-radius: 20px;
-
-
 }
 
 th,
@@ -543,24 +606,18 @@ td {
   padding: 10px;
   text-align: center;
   border-bottom: 1px solid #ddd;
-
 }
 
 th {
   background-color: white;
-
-
 }
 
 .cell {
   padding: 10px;
   border-radius: 5px;
   display: inline-block;
-  
 }
-.cell:hover {
-  background-color: white;
-}
+
 
 .song-photo {
   width: 40px;
@@ -620,7 +677,6 @@ th {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.137);
 }
 
-
 .excel,
 .buscar {
   padding: 5px 10px;
@@ -629,8 +685,6 @@ th {
   cursor: pointer;
   margin: 0 2px;
 }
-
-
 
 .excel {
   background-color: #28a745;
@@ -675,16 +729,16 @@ th {
   margin-top: 10px;
 }
 
-.custom-preview-img  {
+.custom-preview-img {
   max-width: 80%;
   max-height: 50px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 /* imagen de la tabla  */
-.event-photo{
-  width:20vh;
-  border-radius:10px;
+.event-photo {
+  width: 20vh;
+  border-radius: 10px;
 }
 
 .song-photo {
@@ -693,5 +747,4 @@ th {
   border-radius: 4px;
   object-fit: cover;
 }
-
 </style>

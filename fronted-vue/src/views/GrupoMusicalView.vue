@@ -1,27 +1,30 @@
 <template>
   <div>
     <ProtectedNavbar />
-    
-    <div class="content">
-      <div class="header">
+
+    <div :class="['content', theme]">
+      <div class="header" :class="theme">
         <div id="capa-padre">
           <div class="container text-center">
-  <div class="row">
-    <div class="col">
-      <h1>Grupo Musical</h1>
-    </div>
-    <div class="col">
-      <div id="app">
-        <button @click="showCreateModal = true">Crear Grupo</button>
-      </div>
-    </div>
-  </div>
+            <div class="row">
+              <div class="col">
+                <h1>Grupo Musical</h1>
+              </div>
+              <div class="col">
+                <div id="app">
+                  <button @click="showCreateModal = true">Crear Grupo</button>
+                  <button @click="toggleTheme" class="theme-toggle" style="padding-left: 10px;margin-left: 50px;" :class="theme">
+                  <i class="bi bi-moon"></i>
+                </button>
+                </div>
+              </div>
+            </div>
           </div>
           <div id="app">
             <MyModal :isVisible="showCreateModal" @close="showCreateModal = false">
-              <form v-if="!isEditing" @submit.prevent="handleCreate">
+              <form v-if="!isEditing" @submit.prevent="handleCreate" :class="theme">
                 <h2>Crear Grupo</h2>
-                
+
                 <div class="form-group custom-form-group">
                   <label for="imagen" class="upload-label custom-upload-label">
                     <i class="bx bx-check"></i> Subir Imagen
@@ -34,7 +37,7 @@
                     accept="image/*"
                   />
                 </div>
-                
+
                 <div v-if="imagePreview" class="image-preview custom-image-preview">
                   <img
                     :src="imagePreview"
@@ -44,33 +47,52 @@
                 </div>
                 <div class="form-group">
                   <label for="recordlabelName">Grupo:</label>
-                  <input type="text" v-model="formData.recordlabelName" required placeholder="ingrese el nombre" />
+                  <input
+                    type="text"
+                    v-model="formData.recordlabelName"
+                    required
+                    placeholder="ingrese el nombre"
+                  />
                 </div>
                 <div class="form-group">
-  <label for="genreName">Género Musical:</label>
-  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
-</div>
+                  <label for="genreName">Género Musical:</label>
+                  <input
+                    type="text"
+                    v-model="formData.genreName"
+                    required
+                    placeholder="Ingrese el género musical"
+                  />
+                </div>
                 <div class="form-group">
                   <label for="descriptiontName">Descripcion:</label>
-                  <input type="text" v-model="formData.descriptiontName" required placeholder="Ingrese descripcion" />
+                  <input
+                    type="text"
+                    v-model="formData.descriptiontName"
+                    required
+                    placeholder="Ingrese descripcion"
+                  />
                 </div>
                 <div class="form-group">
                   <label for="platform">Plataforma:</label>
-                  <input type="text" v-model="formData.platform" requiredplaceholder=""  />
+                  <input type="text" v-model="formData.platform" requiredplaceholder="" />
                 </div>
                 <div class="form-group">
                   <label for="url">URL:</label>
-                  <input type="url" v-model="formData.url" required placeholder="ingrese la url " />
+                  <input
+                    type="url"
+                    v-model="formData.url"
+                    required
+                    placeholder="ingrese la url "
+                  />
                 </div>
                 <div class="button-container">
                   <button type="submit">Guardar</button>
                 </div>
               </form>
 
-              
-              <form v-else @submit.prevent="handleEdit">
+              <form v-else @submit.prevent="handleEdit" :class="theme">
                 <h2>Editar Grupo Musical</h2>
-                
+
                 <div class="form-group custom-form-group">
                   <label for="edit-imagen" class="upload-label custom-upload-label">
                     <i class="bx bx-check"></i> Cambiar Imagen
@@ -83,7 +105,7 @@
                     accept="image/*"
                   />
                 </div>
-                
+
                 <div v-if="editImagePreview" class="image-preview custom-image-preview">
                   <img
                     :src="editImagePreview"
@@ -93,15 +115,30 @@
                 </div>
                 <div class="form-group">
                   <label for="recordlabelName">Grupo:</label>
-                  <input type="text" v-model="formData.recordlabelName" required placeholder="ingrese el nombre" />
+                  <input
+                    type="text"
+                    v-model="formData.recordlabelName"
+                    required
+                    placeholder="ingrese el nombre"
+                  />
                 </div>
                 <div class="form-group">
-  <label for="genreName">Género Musical:</label>
-  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
-</div>
+                  <label for="genreName">Género Musical:</label>
+                  <input
+                    type="text"
+                    v-model="formData.genreName"
+                    required
+                    placeholder="Ingrese el género musical"
+                  />
+                </div>
                 <div class="form-group">
                   <label for="descriptiontName">Descripcion:</label>
-                  <input type="text" v-model="formData.descriptiontName" required  placeholder="Ingrese descripcion" />
+                  <input
+                    type="text"
+                    v-model="formData.descriptiontName"
+                    required
+                    placeholder="Ingrese descripcion"
+                  />
                 </div>
                 <div class="form-group">
                   <label for="platform">Plataforma:</label>
@@ -109,7 +146,12 @@
                 </div>
                 <div class="form-group">
                   <label for="url">URL:</label>
-                  <input type="url" v-model="formData.url" required placeholder="Ingrese la url"  />
+                  <input
+                    type="url"
+                    v-model="formData.url"
+                    required
+                    placeholder="Ingrese la url"
+                  />
                 </div>
                 <div class="button-container">
                   <button type="submit">Guardar Cambios</button>
@@ -120,8 +162,7 @@
         </div>
       </div>
 
-      
-      <div class="button-container">
+      <div class="button-container" :class="theme">
         <button class="excel">EXCEL</button>
         <input
           type="text"
@@ -131,23 +172,29 @@
         />
       </div>
 
-      
       <div class="table-container">
         <table>
           <thead>
             <tr>
-              <th><div class="cell">#</div></th>
-              <th><div class="cell">Foto</div></th>
-              <th><div class="cell">Nombre del <br> Grupo Musical</div></th>
-              <th><div class="cell">Género Musical<br></div></th>
-              <th><div class="cell">Descripción</div></th>
-              <th><div class="cell">Plataforma</div></th>
-              <th><div class="cell">URL</div></th>
-              <th><div class="cell">Estado</div></th>
-              <th><div class="cell">Acciones</div></th>
+              <th :class="theme"><div class="cell">#</div></th>
+              <th :class="theme"><div class="cell">Foto</div></th>
+              <th :class="theme">
+                <div class="cell">
+                  Nombre del <br />
+                  Grupo Musical
+                </div>
+              </th>
+              <th :class="theme">
+                <div class="cell">Género Musical<br /></div>
+              </th>
+              <th :class="theme"><div class="cell">Descripción</div></th>
+              <th :class="theme"><div class="cell">Plataforma</div></th>
+              <th :class="theme"><div class="cell">URL</div></th>
+              <th :class="theme"><div class="cell">Estado</div></th>
+              <th :class="theme"><div class="cell">Acciones</div></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody :class="theme"> 
             <tr v-for="(song, index) in filteredSongs" :key="index">
               <td>
                 <div class="cell">{{ index + 1 }}</div>
@@ -161,8 +208,8 @@
                 <div class="cell">{{ song.recordlabelName }}</div>
               </td>
               <td>
-  <div class="cell">{{ song.genreName }}</div>
-</td>
+                <div class="cell">{{ song.genreName }}</div>
+              </td>
               <td>
                 <div class="cell">{{ song.descriptiontName }}</div>
               </td>
@@ -204,18 +251,31 @@
         </table>
       </div>
     </div>
-  </div> 
+  </div>
 </template>
 
 <script>
 import ProtectedNavbar from "../components/ProtectedNavbar.vue";
 import MyModal from "../components/Modal.vue";
 import Swal from "sweetalert2";
+import { ref } from "vue";
 
 export default {
   components: {
     ProtectedNavbar,
     MyModal,
+  },
+  setup() {
+    // Variable que controla el tema
+    const theme = ref(localStorage.getItem("theme") || "light");
+
+    // Método para alternar entre claro y oscuro
+    const toggleTheme = () => {
+      theme.value = theme.value === "light" ? "dark" : "light";
+      localStorage.setItem("theme", theme.value); // Guardar en localStorage
+    };
+
+    return { theme, toggleTheme };
   },
   data() {
     return {
@@ -228,32 +288,34 @@ export default {
         platform: "",
         url: "",
         status: "Activo",
-        photo: "", 
+        photo: "",
       },
       songs: [
         {
-          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT35JAXVv5xGOiUnS3b0o9z1ckav3zikTHZXA&s",
+          photo:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT35JAXVv5xGOiUnS3b0o9z1ckav3zikTHZXA&s",
           recordlabelName: "Disquera 1",
-          genreName:"Bachata",
+          genreName: "Bachata",
           descriptiontName: "Descripcion 1",
           platform: "Plataforma 1",
           url: "https://youtube.com/song1",
           status: "Activo",
         },
         {
-          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiogmYyt7eCSoj7IQdjkSVbOfu9N0pTR2y-w&s",
+          photo:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiogmYyt7eCSoj7IQdjkSVbOfu9N0pTR2y-w&s",
           recordlabelName: "Disquera 2",
-          genreName:"Pop",
+          genreName: "Pop",
           descriptiontName: "Descripcion 2",
           platform: "Plataforma 2",
           url: "https://youtube.com/song2",
           status: "Eliminado",
-        }
+        },
       ],
       isEditing: false,
       editIndex: null,
-      imagePreview: null, 
-      editImagePreview: null, 
+      imagePreview: null,
+      editImagePreview: null,
     };
   },
   computed: {
@@ -274,20 +336,16 @@ export default {
       const file = event.target.files[0];
       if (!file) return;
 
-      
       this.imagePreview = URL.createObjectURL(file);
 
-      
       this.formData.photo = this.imagePreview;
     },
     handleEditFileUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
 
-      
       this.editImagePreview = URL.createObjectURL(file);
 
-     
       this.formData.photo = this.editImagePreview;
     },
     handleCreate() {
@@ -295,7 +353,7 @@ export default {
       this.songs.push(newSong);
       this.showCreateModal = false;
       this.resetFormData();
-      this.imagePreview = null; 
+      this.imagePreview = null;
       Swal.fire("¡Éxito!", "El Grupo Musical ha sido creado exitosamente.", "success");
     },
     startEditing(song) {
@@ -310,19 +368,19 @@ export default {
         this.showCreateModal = false;
         this.isEditing = false;
         this.resetFormData();
-        this.editImagePreview = null; 
+        this.editImagePreview = null;
         Swal.fire("¡Éxito!", "El Grupo Musical ha sido creado exitosamente.", "success");
       }
     },
     resetFormData() {
       this.formData = {
         recordlabelName: "",
-        genreName:"",
+        genreName: "",
         descriptiontName: "",
         platform: "",
         url: "",
         status: "Activo",
-        photo: "", 
+        photo: "",
       };
     },
     deleteSong(song) {
@@ -334,7 +392,6 @@ export default {
       Swal.fire("¡Éxito!", "El Grupo Musical ha sido eliminado exitosamente.", "success");
     },
     viewSongDetails(song) {
-      
       Swal.fire({
         title: `Detalles de ${song.recordlabelName}`,
         html: `
@@ -342,7 +399,7 @@ export default {
             <img src="${song.photo}" alt="Foto de ${song.recordlabelName}" style="max-width: 100%; height: auto; ">
           </div>
           <p><strong>Nombre del Grupo Musical:</strong><br> ${song.recordlabelName}</p>
-          <p><strong>Género Musical:</strong><br> ${song. genreName}</p>
+          <p><strong>Género Musical:</strong><br> ${song.genreName}</p>
           <p><strong>Descripcion:</strong><br> ${song.descriptiontName}</p>
           <p><strong>Plataforma:</strong><br> ${song.platform}</p>
           <p><strong>URL:</strong><br> <a href="${song.url}" target="_blank">${song.url}</a></p>
@@ -367,6 +424,23 @@ export default {
 };
 </script>
 <style scoped>
+.content {
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+  display: flex;
+  flex-direction: column; /* Organización en columna */
+}
+/* Estilo para el tema claro */
+.light {
+  background-color: #ffffff; /* Fondo blanco */
+  color: #000000; /* Texto negro */
+}
+
+/* Estilo para el tema oscuro */
+.dark {
+  background-color: #555555; /* Fondo oscuro */
+  color: #e0e0e0; /* Texto claro */
+}
 #capa-padre {
   background-color: aliceblue;
   border-radius: 20px;
@@ -402,20 +476,15 @@ form {
   flex-direction: column;
   align-items: center;
   width: 100%;
-
-  
 }
 
 .form-group {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   margin-bottom: 15px;
   width: 70%;
-
-  
-  
 }
 
 .form-group label {
@@ -423,7 +492,6 @@ form {
   margin-right: 10px;
   font-weight: bold;
   text-align: right;
-
 }
 
 .form-group input {
@@ -440,7 +508,7 @@ form {
   margin-top: 20px;
   background-color: aliceblue;
   padding: 10px;
-  border-radius:12px;
+  border-radius: 12px;
 }
 
 button[type="submit"] {
@@ -462,7 +530,7 @@ button[type="submit"]:hover {
   background-color: aliceblue;
   border-radius: 10px;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
-  margin-top: 20px; 
+  margin-top: 20px;
   overflow-x: auto;
 }
 
@@ -489,12 +557,8 @@ th {
   display: inline-block;
   max-width: 250px;
   word-wrap: break-word;
+}
 
-  
-}
-.cell:hover {
-  background-color: white;
-}
 
 .song-photo {
   width: 40px;
@@ -554,7 +618,6 @@ th {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.137);
 }
 
-
 .excel,
 .buscar {
   padding: 5px 10px;
@@ -563,7 +626,6 @@ th {
   cursor: pointer;
   margin: 0 2px;
 }
-
 
 .excel {
   background-color: #28a745;
@@ -587,7 +649,6 @@ th {
 .custom-form-group {
   display: flex;
   flex-direction: column;
-  
 }
 
 .custom-upload-label {
@@ -621,5 +682,4 @@ th {
   border-radius: 4px;
   object-fit: cover;
 }
-
 </style>

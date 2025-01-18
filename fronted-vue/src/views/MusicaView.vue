@@ -2,22 +2,30 @@
   <div>
     <ProtectedNavbar />
     <!-- Modal Crear Canción -->
-    <div class="content">
-      <div class="header">
+    <div :class="['content', theme]">
+      <div class="header" :class="theme">
         <div id="capa-padre">
           <div class="container text-center">
-  <div class="row">
-    <div class="col">
-      <h1>Cancion</h1>
-    </div>
-    <div class="col">
-      <div id="app">
-        <button @click="showCreateModal = true">Agregar Cancion</button>
-      </div>
-    </div>
-  </div>
+            <div class="row">
+              <div class="col">
+                <h1>Cancion</h1>
+              </div>
+              <div class="col">
+                <div id="app">
+                  <button @click="showCreateModal = true">Agregar Cancion</button>
+                  <button
+                    @click="toggleTheme"
+                    class="theme-toggle"
+                    style="padding-left: 10px; margin-left: 50px"
+                    :class="theme"
+                  >
+                    <i class="bi bi-moon"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
             <MyModal :isVisible="showCreateModal" @close="showCreateModal = false">
-              <form v-if="!isEditing" @submit.prevent="handleCreate">
+              <form v-if="!isEditing" @submit.prevent="handleCreate" :class="theme">
                 <h2>Agregar Canción</h2>
                 <!-- Subir Imagen -->
                 <div class="form-group custom-form-group">
@@ -49,9 +57,14 @@
                   <input type="text" v-model="formData.artistName" required />
                 </div>
                 <div class="form-group">
-  <label for="genreName">Género Musical:</label>
-  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
-</div>
+                  <label for="genreName">Género Musical:</label>
+                  <input
+                    type="text"
+                    v-model="formData.genreName"
+                    required
+                    placeholder="Ingrese el género musical"
+                  />
+                </div>
                 <div class="form-group">
                   <label for="album">Álbum:</label>
                   <input type="text" v-model="formData.album" required />
@@ -62,7 +75,7 @@
               </form>
 
               <!-- Formulario para editar una canción -->
-              <form v-else @submit.prevent="handleEdit">
+              <form v-else @submit.prevent="handleEdit" :class="theme">
                 <h2>Editar Canción</h2>
                 <!-- Subir Imagen en edición -->
                 <div class="form-group custom-form-group">
@@ -87,19 +100,39 @@
                 </div>
                 <div class="form-group">
                   <label for="songName">Nombre de la Canción:</label>
-                  <input type="text" v-model="formData.songName" required  placeholder="ingrese nombre" />
+                  <input
+                    type="text"
+                    v-model="formData.songName"
+                    required
+                    placeholder="ingrese nombre"
+                  />
                 </div>
                 <div class="form-group">
                   <label for="artistName">Nombre del Artista:</label>
-                  <input type="text" v-model="formData.artistName" required placeholder="ingrese del artista" />
+                  <input
+                    type="text"
+                    v-model="formData.artistName"
+                    required
+                    placeholder="ingrese del artista"
+                  />
                 </div>
                 <div class="form-group">
-  <label for="genreName">Género Musical:</label>
-  <input type="text" v-model="formData.genreName" required placeholder="Ingrese el género musical" />
-</div>
+                  <label for="genreName">Género Musical:</label>
+                  <input
+                    type="text"
+                    v-model="formData.genreName"
+                    required
+                    placeholder="Ingrese el género musical"
+                  />
+                </div>
                 <div class="form-group">
                   <label for="album">Álbum:</label>
-                  <input type="text" v-model="formData.album" required placeholder="ingrese el album" />
+                  <input
+                    type="text"
+                    v-model="formData.album"
+                    required
+                    placeholder="ingrese el album"
+                  />
                 </div>
 
                 <div class="button-container">
@@ -112,7 +145,7 @@
       </div>
 
       <!-- Botones para exportar y buscar -->
-      <div class="button-container">
+      <div class="button-container" :class="theme">
         <button class="excel">EXCEL</button>
         <input
           type="text"
@@ -127,17 +160,19 @@
         <table>
           <thead>
             <tr>
-              <th><div class="cell">#</div></th>
-              <th><div class="cell">Foto</div></th>
-              <th><div class="cell">Nombre de la Canción</div></th>
-              <th><div class="cell">Nombre del Artista</div></th>
-              <th><div class="cell">Género Musical<br></div></th>
-              <th><div class="cell">Álbum</div></th>
-              <th><div class="cell">Estado</div></th>
-              <th><div class="cell">Acciones</div></th>
+              <th :class="theme"><div class="cell">#</div></th>
+              <th :class="theme"><div class="cell">Foto</div></th>
+              <th :class="theme"><div class="cell">Nombre de la Canción</div></th>
+              <th :class="theme"><div class="cell">Nombre del Artista</div></th>
+              <th :class="theme">
+                <div class="cell">Género Musical<br /></div>
+              </th>
+              <th :class="theme"><div class="cell">Álbum</div></th>
+              <th :class="theme"><div class="cell">Estado</div></th>
+              <th :class="theme"><div class="cell">Acciones</div></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody :class="theme">
             <tr v-for="(song, index) in filteredSongs" :key="index">
               <td>
                 <div class="cell">{{ index + 1 }}</div>
@@ -154,8 +189,8 @@
                 <div class="cell">{{ song.artistName }}</div>
               </td>
               <td>
-  <div class="cell">{{ song.genreName }}</div>
-</td>
+                <div class="cell">{{ song.genreName }}</div>
+              </td>
               <td>
                 <div class="cell">{{ song.album }}</div>
               </td>
@@ -197,11 +232,24 @@
 import ProtectedNavbar from "../components/ProtectedNavbar.vue";
 import MyModal from "../components/Modal.vue";
 import Swal from "sweetalert2";
+import { ref } from "vue";
 
 export default {
   components: {
     ProtectedNavbar,
     MyModal,
+  },
+  setup() {
+    // Variable que controla el tema
+    const theme = ref(localStorage.getItem("theme") || "light");
+
+    // Método para alternar entre claro y oscuro
+    const toggleTheme = () => {
+      theme.value = theme.value === "light" ? "dark" : "light";
+      localStorage.setItem("theme", theme.value); // Guardar en localStorage
+    };
+
+    return { theme, toggleTheme };
   },
   data() {
     return {
@@ -217,7 +265,8 @@ export default {
       },
       songs: [
         {
-          photo: "https://www.nus.agency/wp-content/uploads/2023/03/musica-arte-scaled.jpg",
+          photo:
+            "https://www.nus.agency/wp-content/uploads/2023/03/musica-arte-scaled.jpg",
           songName: "Canción 1",
           artistName: "Artista 1",
           genreName: "Bachata",
@@ -225,7 +274,8 @@ export default {
           status: "Activo",
         },
         {
-          photo: "https://estaticos.elcolombiano.com/binrepository/780x565/0c0/0d0/none/11101/EDTW/nostalgia-musica-1_42537840_20230605193530.jpg",
+          photo:
+            "https://estaticos.elcolombiano.com/binrepository/780x565/0c0/0d0/none/11101/EDTW/nostalgia-musica-1_42537840_20230605193530.jpg",
           songName: "Canción 2",
           artistName: "Artista 2",
           genreName: "Pop",
@@ -233,7 +283,8 @@ export default {
           status: "Activo",
         },
         {
-          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiE-PlDusYL3t9pcMd3oZJrRoTu_IuZKgNzg&s",
+          photo:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiE-PlDusYL3t9pcMd3oZJrRoTu_IuZKgNzg&s",
           songName: "Canción 3",
           artistName: "Artista 3",
           genreName: "Salsa",
@@ -338,7 +389,7 @@ export default {
           </div>
           <p><strong>Nombre de la Canción:</strong> <br>${song.songName}</p>
           <p><strong>Nombre del Artista:</strong><br> ${song.artistName}</p>
-           <p><strong>Género Musical:</strong><br> ${song. genreName}</p>
+           <p><strong>Género Musical:</strong><br> ${song.genreName}</p>
           <p><strong>Álbum:</strong><br> ${song.album}</p>
           <p><strong>URL:</strong><br> <a href="${song.url}" target="_blank">${song.url}</a></p>
           <p><strong>Estado:</strong><br> ${song.status}</p>
@@ -362,6 +413,23 @@ export default {
 };
 </script>
 <style scoped>
+.content {
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+  display: flex;
+  flex-direction: column; /* Organización en columna */
+}
+/* Estilo para el tema claro */
+.light {
+  background-color: #ffffff; /* Fondo blanco */
+  color: #000000; /* Texto negro */
+}
+
+/* Estilo para el tema oscuro */
+.dark {
+  background-color: #555555; /* Fondo oscuro */
+  color: #e0e0e0; /* Texto claro */
+}
 #capa-padre {
   background-color: aliceblue;
   border-radius: 20px;
@@ -403,7 +471,7 @@ form {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   margin-bottom: 15px;
   width: 70%;
 }
@@ -429,7 +497,7 @@ form {
   margin-top: 20px;
   background-color: aliceblue;
   padding: 10px;
-  border-radius:12px;
+  border-radius: 12px;
 }
 
 button[type="submit"] {
@@ -479,9 +547,7 @@ th {
   max-width: 250px;
   word-wrap: break-word;
 }
-.cell:hover {
-  background-color: white;
-}
+
 
 .song-photo {
   width: 40px;
@@ -541,7 +607,6 @@ th {
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.137);
 }
 
-
 .excel,
 .buscar {
   padding: 5px 10px;
@@ -550,8 +615,6 @@ th {
   cursor: pointer;
   margin: 0 2px;
 }
-
-
 
 .excel {
   background-color: #28a745;
@@ -575,7 +638,6 @@ th {
 .custom-form-group {
   display: flex;
   flex-direction: column;
-  
 }
 
 .custom-upload-label {

@@ -2,22 +2,23 @@
   <div>
     <ProtectedNavbar />
     <!-- Modal Crear Canción -->
-    <div class="content">
-      <div class="header">
+    <div :class="['content', theme]">
+      <div class="header" :class="theme">
         <div id="capa-padre">
           <div class="container text-center">
             <div class="row">
-              <div class="col">
-                <h1>Álbum</h1>
+              <div class="col" >
+                <h1 >Álbum</h1>
               </div>
               <div class="col">
                 <div id="app">
                   <button @click="showCreateModal = true">Crear Álbum</button>
+                  <button @click="toggleTheme" class="theme-toggle" :class="theme" style="padding-left: 10px;margin-left: 50px;"> <i class="bi bi-moon"></i></button>
                 </div>
               </div>
             </div>
-            <MyModal :isVisible="showCreateModal" @close="showCreateModal = false">
-              <form v-if="!isEditing" @submit.prevent="handleCreate">
+            <MyModal :isVisible="showCreateModal" @close="showCreateModal = false" >
+              <form v-if="!isEditing" @submit.prevent="handleCreate" :class="theme">
                 <h2>Crear Álbum</h2>
                 <!-- Subir Imagen -->
                 <div class="form-group custom-form-group">
@@ -71,7 +72,7 @@
               </form>
 
               <!-- Formulario para editar una canción -->
-              <form v-else @submit.prevent="handleEdit">
+              <form v-else @submit.prevent="handleEdit" :class="theme">
                 <h2>Editar Àlbum</h2>
                 <!-- Subir Imagen en edición -->
                 <div class="form-group custom-form-group">
@@ -129,7 +130,7 @@
       </div>
 
       <!-- Botones para exportar y buscar -->
-      <div class="button-container">
+      <div class="button-container" :class="theme">
         <button class="excel">EXCEL</button>
         <input
           type="text"
@@ -140,24 +141,24 @@
       </div>
 
       <!-- Tabla de Canciones -->
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th><div class="cell">#</div></th>
-              <th><div class="cell">Foto</div></th>
-              <th><div class="cell">Nombre del Álbum</div></th>
-              <th><div class="cell">Nombre del Grupo</div></th>
-              <th>
+      <div class="table-container"  :class="theme">
+        <table  >
+          <thead :class="theme">
+            <tr >
+              <th :class="theme"><div class="cell" >#</div></th>
+              <th :class="theme"><div class="cell">Foto</div></th>
+              <th :class="theme"><div class="cell">Nombre del Álbum</div></th>
+              <th :class="theme"><div class="cell">Nombre del Grupo</div></th>
+              <th :class="theme">
                 <div class="cell">Género Musical<br /></div>
               </th>
-              <th><div class="cell">Integrantes</div></th>
-              <th><div class="cell">URL</div></th>
-              <th><div class="cell">Estado</div></th>
-              <th><div class="cell">Acciones</div></th>
+              <th :class="theme"><div class="cell">Integrantes</div></th>
+              <th :class="theme"><div class="cell">URL</div></th>
+              <th :class="theme"><div class="cell">Estado</div></th>
+              <th :class="theme"><div class="cell">Acciones</div></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody :class="theme">
             <tr v-for="(song, index) in filteredSongs" :key="index">
               <td>
                 <div class="cell">{{ index + 1 }}</div>
@@ -221,11 +222,24 @@
 import ProtectedNavbar from "../components/ProtectedNavbar.vue";
 import MyModal from "../components/Modal.vue";
 import Swal from "sweetalert2";
+import { ref } from "vue";
 
 export default {
   components: {
     ProtectedNavbar,
     MyModal,
+  },
+  setup() {
+    // Variable que controla el tema
+    const theme = ref(localStorage.getItem("theme") || "light");
+
+    // Método para alternar entre claro y oscuro
+    const toggleTheme = () => {
+      theme.value = theme.value === "light" ? "dark" : "light";
+      localStorage.setItem("theme", theme.value); // Guardar en localStorage
+    };
+
+    return { theme, toggleTheme };
   },
   data() {
     return {
@@ -393,6 +407,23 @@ export default {
 };
 </script>
 <style scoped>
+.content {
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+  display: flex;
+  flex-direction: column; /* Organización en columna */
+}
+/* Estilo para el tema claro */
+.light {
+  background-color: #ffffff; /* Fondo blanco */
+  color: #000000; /* Texto negro */
+}
+
+/* Estilo para el tema oscuro */
+.dark {
+  background-color: #555555; /* Fondo oscuro */
+  color: #e0e0e0; /* Texto claro */
+}
 #capa-padre {
   background-color: aliceblue;
   border-radius: 20px;
@@ -500,6 +531,7 @@ th {
   border-radius: 5px;
 }
 
+
 .cell {
   padding: 10px;
   border-radius: 5px;
@@ -507,9 +539,7 @@ th {
   max-width: 250px;
   word-wrap: break-word;
 }
-.cell:hover {
-  background-color: white;
-}
+
 
 .song-photo {
   width: 40px;
