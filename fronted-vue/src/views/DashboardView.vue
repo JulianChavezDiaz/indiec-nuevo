@@ -10,6 +10,8 @@
       Cambiar Tema
     </button>
   </div>
+    <div class="img-01">
+    </div>
 </template>
 
 <script>
@@ -79,12 +81,13 @@ export default {
   background-color: #45a049; /* Verde más oscuro al pasar el cursor */
 }
 
+
 /* Estilos del encabezado */
 #inicio {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("/public/img/fondo.png");
+  background-image: url("/public/img/fondo 2.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -103,6 +106,7 @@ export default {
   flex: 1; /* Permite que este contenedor ocupe el espacio restante */
 }
 
+
 /* Estilos adicionales */
 .contenedor {
   height: 40vh;
@@ -110,4 +114,16 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.img-01{
+    background-image: url("/public/img/fondo1.png");
+    background-size: cover;
+    background-position: absolute;
+    background-repeat: no-repeat;
+    width: 587.49px;
+    height: 571.91px;
+    border-radius: 25px;
+    position:absolute;
+    left: calc(50% - 587.49px/2 + 455.24px);
+    top: calc(50% - 571.91px/2 + 221.95px);
+   }
 </style>

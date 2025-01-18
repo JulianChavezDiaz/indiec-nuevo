@@ -368,6 +368,7 @@ export default {
 </script>
 <style scoped>
 #capa-padre {
+  background-image: url("/public/img/fondo 2.png");
   background-color: aliceblue;
   border-radius: 20px;
   text-align: center;
@@ -375,7 +376,7 @@ export default {
   padding: 10px;
   box-shadow: 5px 2px 3px 1px rgba(0, 0, 0, 0.164);
   font-size: 16px;
-  color: black;
+  color: white;
 }
 
 #app {
