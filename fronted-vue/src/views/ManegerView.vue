@@ -2,28 +2,35 @@
   <div>
     <ProtectedNavbar />
     <!-- Modal Crear Manager -->
-    <div class="content">
+    <div :class="['content', theme]">
       <div class="header">
         <div id="capa-padre">
           <div class="container text-center">
-  <div class="row">
-    <div class="col">
-      <h1>Manager</h1>
-    </div>
-    <div class="col">
-      <div id="app">
-        <button @click="showCreateModal = true">Agregar Manager</button>
-      </div>
-    </div>
-    </div>
+            <div class="row">
+              <div class="col">
+                <h1>Manager</h1>
+              </div>
+              <div class="col">
+                <div id="app">
+                  <button @click="showCreateModal = true">Agregar Manager</button>
+                  <button
+                    @click="toggleTheme"
+                    class="theme-toggle"
+                    style="padding-left: 10px; margin-left: 50px"
+                    :class="theme"
+                  >
+                    <i class="bi bi-moon"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
             <MyModal :isVisible="showCreateModal" @close="closeModals">
-              <form @submit.prevent="handleCreate">
-
+              <form @submit.prevent="handleCreate" :class="theme">
                 <h2>Agregar Manager</h2>
 
                 <h2>Crear Manager</h2>
-                 <!-- Subir Imagen -->
-                 <div class="form-group custom-form-group">
+                <!-- Subir Imagen -->
+                <div class="form-group custom-form-group">
                   <label for="imagen" class="upload-label custom-upload-label">
                     <i class="bx bx-check"></i> Subir Imagen
                   </label>
@@ -69,7 +76,7 @@
                     style="background-color: #0000002a"
                   />
                 </div>
-               
+
                 <div class="button-container">
                   <button type="submit">Guardar</button>
                 </div>
@@ -78,7 +85,7 @@
 
             <!-- Modal Editar Manager -->
             <MyModal :isVisible="showEditModal" @close="closeModals">
-              <form @submit.prevent="handleEdit">
+              <form @submit.prevent="handleEdit" :class="theme">
                 <h2>Editar Manager</h2>
                 <!-- Subir Imagen en edición -->
                 <div class="form-group custom-form-group">
@@ -147,9 +154,9 @@
                     style="background-color: #0000002a"
                   />
                 </div>
-               
-                <div class="button-container">
-                  <button type="submit">Guardar Cambios</button>
+
+                <div class="button-container" >
+                  <button type="submit" >Guardar Cambios</button>
                 </div>
               </form>
             </MyModal>
@@ -173,17 +180,17 @@
         <table>
           <thead>
             <tr>
-              <th><div class="cell">#</div></th>
-              <th><div class="cell">Foto</div></th>
-              <th><div class="cell">Apellidos</div></th>
-              <th><div class="cell">Nombres</div></th>
-              <th><div class="cell">Correo</div></th>
-              <th><div class="cell">Género</div></th>
-              <th><div class="cell">Estado</div></th>
-              <th><div class="cell">Acciones</div></th>
+              <th :class="theme"><div class="cell">#</div></th>
+              <th :class="theme"><div class="cell">Foto</div></th>
+              <th :class="theme"><div class="cell">Apellidos</div></th>
+              <th :class="theme"><div class="cell">Nombres</div></th>
+              <th :class="theme"><div class="cell">Correo</div></th>
+              <th :class="theme"><div class="cell">Género</div></th>
+              <th :class="theme"><div class="cell">Estado</div></th>
+              <th :class="theme"><div class="cell">Acciones</div></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody :class="theme">
             <tr v-for="(user, index) in filteredUsers" :key="index">
               <td>
                 <div class="cell">{{ index + 1 }}</div>
@@ -244,11 +251,24 @@
 import ProtectedNavbar from "../components/ProtectedNavbar.vue";
 import MyModal from "../components/Modal.vue";
 import Swal from "sweetalert2";
+import { ref } from "vue";
 
 export default {
   components: {
     ProtectedNavbar,
     MyModal,
+  },
+  setup() {
+    // Variable que controla el tema
+    const theme = ref(localStorage.getItem("theme") || "light");
+
+    // Método para alternar entre claro y oscuro
+    const toggleTheme = () => {
+      theme.value = theme.value === "light" ? "dark" : "light";
+      localStorage.setItem("theme", theme.value); // Guardar en localStorage
+    };
+
+    return { theme, toggleTheme };
   },
   data() {
     return {
@@ -271,7 +291,8 @@ export default {
           email: "Alexander@ya.ed",
           gender: "Masculino",
           status: "Activo",
-          photo: "https://wallpapers.com/images/featured/fotos-de-perfil-xj8jigxkai9jag4g.jpg",
+          photo:
+            "https://wallpapers.com/images/featured/fotos-de-perfil-xj8jigxkai9jag4g.jpg",
         },
         {
           firstName: "Jane",
@@ -279,7 +300,8 @@ export default {
           email: "Alexander@ya.ed",
           gender: "Femenino",
           status: "Inactivo",
-          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeiGQCoJHB8ls2xOC3gE8iEuF81qWCe_V9zA&s",
+          photo:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeiGQCoJHB8ls2xOC3gE8iEuF81qWCe_V9zA&s",
         },
         {
           firstName: "Alexander",
@@ -287,7 +309,8 @@ export default {
           email: "Alexander@ya.ed",
           gender: "Masculino",
           status: "Activo",
-          photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcNwi94JURMqWDKYEYQaobN4WaP4tNkx3oNQ&s",
+          photo:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcNwi94JURMqWDKYEYQaobN4WaP4tNkx3oNQ&s",
         },
       ],
     };
@@ -399,8 +422,26 @@ export default {
 </script>
 
 <style scoped>
+.content {
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+  display: flex;
+  flex-direction: column; /* Organización en columna */
+}
+/* Estilo para el tema claro */
+.light {
+  background-color: #ffffff; /* Fondo blanco */
+  color: #000000; /* Texto negro */
+}
+
+/* Estilo para el tema oscuro */
+.dark {
+  background-color: #555555; /* Fondo oscuro */
+  color: #e0e0e0; /* Texto claro */
+}
 /* Estilos para el contenedor principal */
 #capa-padre {
+  background-image: url("/public/img/fondo 2.png");
   background-color: aliceblue;
   border-radius: 20px;
   text-align: center;
@@ -408,7 +449,7 @@ export default {
   padding: 10px;
   box-shadow: 5px 2px 3px 1px rgba(0, 0, 0, 0.164);
   font-size: 16px;
-  color: black;
+  color: white;
 }
 
 /* Estilos para el formulario y botones */
@@ -442,7 +483,7 @@ form {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   margin-bottom: 15px;
   width: 70%;
 }
@@ -468,7 +509,7 @@ form {
   margin-top: 20px;
   background-color: aliceblue;
   padding: 10px;
-  border-radius:12px;
+  border-radius: 12px;
 }
 
 button[type="submit"] {
@@ -515,9 +556,6 @@ th {
   border-radius: 5px;
   display: inline-block;
 }
-.cell:hover {
-  background-color: white;
-}
 
 .user-photo {
   width: 40px;
@@ -550,28 +588,25 @@ th {
 .view-btn {
   background-color: #6c757d;
   color: #fff;
-  box-shadow:  2px 2px 2px 2px rgba(0, 0, 0, 0.137);
-
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.137);
 }
 
 .edit-btn {
   background-color: #ffc107;
   color: #fff;
-  box-shadow:  2px 2px 2px 2px rgba(0, 0, 0, 0.137);
-
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.137);
 }
 
 .delete-btn {
   background-color: #dc3545;
   color: #fff;
-    box-shadow:  2px 2px 2px 2px rgba(0, 0, 0, 0.137);
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.137);
 }
 
 .restore-btn {
   background-color: #17a2b8;
   color: #fff;
-    box-shadow:  2px 2px 2px 2px rgba(0, 0, 0, 0.137);
-
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.137);
 }
 
 .excel,
@@ -583,14 +618,11 @@ th {
   margin: 0 2px;
 }
 
-
-
 .excel {
   background-color: #28a745;
   color: #fff;
   margin-left: 10px;
-  box-shadow:  2px 2px 2px 2px rgba(0, 0, 0, 0.137);
-
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.137);
 }
 
 .buscar {
@@ -605,14 +637,9 @@ th {
   text-align: center;
 }
 
-
-
-
-
 .custom-form-group {
   display: flex;
   flex-direction: column;
-  
 }
 
 .custom-upload-label {
