@@ -1,87 +1,89 @@
 <template>
   <ProtectedNavbar />
+  <top-bar />
   <div class="content">
-    <div class="header">
-      <div id="inicio">
-        <h1 style="color: white;">
-          "Da vida a la música: organiza géneros, crea grupos, impulsa artistas y lleva
-          tus eventos al siguiente nivel."
-        </h1>
-      </div>
-      <div id="capa-padre">
-        <div>
-          <div class="chart-container">
-            <!-- Gráfico Circular (al lado izquierdo) -->
-            <div class="chart-item">
-              <div class="chart-box">
-                <h2 class="chart-title">MUSICA</h2>
-                <canvas id="pieChart" width="200" height="200"></canvas>
+    <div class="content-wrapper">
+      <div class="header">
+        <div id="inicio">
+          <h1 style="color: white">
+            "Da vida a la música: organiza géneros, crea grupos, impulsa artistas y lleva
+            tus eventos al siguiente nivel."
+          </h1>
+        </div>
+        <div id="capa-padre">
+          <div>
+            <div class="chart-container">
+              <!-- Gráfico Circular (al lado izquierdo) -->
+              <div class="chart-item">
+                <div class="chart-box">
+                  <h2 class="chart-title">MUSICA</h2>
+                  <canvas id="pieChart" width="200" height="200"></canvas>
+                </div>
+              </div>
+              <!-- Calendario (centrado y ensanchado) -->
+              <div class="chart-item calendar-container">
+                <!-- Sección del DatePicker -->
+                <div>
+                  <Datepicker
+                    v-model="selectedDate"
+                    :format="'yyyy-MM-dd'"
+                    :inline="true"
+                    :hide-input="true"
+                  />
+                </div>
+              </div>
+              <!-- Notificaciones (al lado derecho del calendario) -->
+              <div class="notifications-container">
+                <div
+                  v-for="(notification, index) in notifications"
+                  :key="index"
+                  class="notification-bar"
+                >
+                  <p>{{ notification.date }}</p>
+                  <!-- Barra de Progreso Estática y de color verde -->
+                  <progress class="green-progress" value="100" max="100"></progress>
+                </div>
               </div>
             </div>
-            <!-- Calendario (centrado y ensanchado) -->
-            <div class="chart-item calendar-container">
-              <!-- Sección del DatePicker -->
-              <div>
-                <Datepicker
-                  v-model="selectedDate"
-                  :format="'yyyy-MM-dd'"
-                  :inline="true"
-                  :hide-input="true"
-                />
-              </div>
-            </div>
-            <!-- Notificaciones (al lado derecho del calendario) -->
-            <div class="notifications-container">
+            <div class="cards-container">
               <div
-                v-for="(notification, index) in notifications"
-                :key="index"
-                class="notification-bar"
+                v-for="(data, index) in percentageData"
+                :key="data.id"
+                class="card"
+                @mouseover="hoveredIndex = index"
+                @mouseleave="hoveredIndex = null"
               >
-                <p>{{ notification.date }}</p>
-                <!-- Barra de Progreso Estática y de color verde -->
-                <progress class="green-progress" value="100" max="100"></progress>
-              </div>
-            </div>
-          </div>
-          <div class="cards-container">
-            <div
-              v-for="(data, index) in percentageData"
-              :key="data.id"
-              class="card"
-              @mouseover="hoveredIndex = index"
-              @mouseleave="hoveredIndex = null"
-            >
-              <div
-                class="card-image"
-                :style="{
-                  backgroundImage: `url(${
-                    hoveredIndex === index ? data.hoverImage : data.image
-                  })`,
-                }"
-              ></div>
-              <div class="main-content">
-                <p>{{ data.name }}</p>
-                <div class="rating-container">
-                  <div class="coin-base">
-                    <img
-                      src="https://i.postimg.cc/T1F1K0bW/Ethereum.png"
-                      alt="Ethereum"
-                      class="small-image"
-                    />
+                <div
+                  class="card-image"
+                  :style="{
+                    backgroundImage: `url(${
+                      hoveredIndex === index ? data.hoverImage : data.image
+                    })`,
+                  }"
+                ></div>
+                <div class="main-content">
+                  <p>{{ data.name }}</p>
+                  <div class="rating-container">
+                    <div class="coin-base">
+                      <img
+                        src="https://i.postimg.cc/T1F1K0bW/Ethereum.png"
+                        alt="Ethereum"
+                        class="small-image"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- Añadido nuevo DatePicker -->
-        <div>
-          <DatePicker />
+          <!-- Añadido nuevo DatePicker -->
+          <div>
+            <DatePicker />
+          </div>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -90,12 +92,15 @@ import { ref, onMounted } from "vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import Chart from "chart.js/auto";
+import TopBar from "@/components/top-bar.vue";
 
 export default {
   name: "Dashboard",
   components: {
     ProtectedNavbar,
     Datepicker,
+    TopBar
+
   },
   setup() {
     // Variable que controla el tema
@@ -205,6 +210,11 @@ export default {
 </script>
 
 <style scoped>
+/*com*/
+.content-wrapper {
+  margin-top: 80px; /* Ajusta este valor según la altura de tu top-bar */
+}
+
 @import "../../node_modules/@syncfusion/ej2-base/styles/material.css";
 @import "../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
 @import "../../node_modules/@syncfusion/ej2-vue-calendars/styles/material.css";

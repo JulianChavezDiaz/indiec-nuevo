@@ -1,14 +1,17 @@
 <template>
   <ProtectedNavbar />
-  <div class="content">
-    <div class="header">
-      <div id="inicio">
-        <h1>Perfil</h1>
-      </div>
+  <top-bar />
+  <div :class="['content', theme]">
+    <div class="content-wrapper" :class="theme">
+      <div class="header">
+        <div id="inicio">
+          <h1>Perfil</h1>
+        </div>
 
-      <div id="capa-padre">
-        <h1>Artista</h1>
-        <hr />
+        <div id="capa-padre">
+          <h1>Artista</h1>
+          <hr />
+        </div>
       </div>
     </div>
   </div>
@@ -16,16 +19,24 @@
 
 <script>
 import ProtectedNavbar from "../components/ProtectedNavbar.vue";
+import TopBar from "@/components/top-bar.vue";
 
 export default {
-  name: 'perfil artista',
+  name: "perfil artista",
   components: {
     ProtectedNavbar,
+    TopBar
+
   },
 };
 </script>
 
 <style scoped>
+/*com*/
+.content-wrapper {
+  margin-top: 80px; /* Ajusta este valor según la altura de tu top-bar */
+}
+
 #inicio {
   display: flex;
   justify-content: center;

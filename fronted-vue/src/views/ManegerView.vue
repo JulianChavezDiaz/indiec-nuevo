@@ -2,7 +2,9 @@
   <div>
     <ProtectedNavbar />
     <!-- Modal Crear Manager -->
-    <div :class="['content', theme]">
+    <top-bar /> <div :class="['content', theme]">
+      <div class="content-wrapper" :class="theme">
+
       <div class="header">
         <div id="capa-padre">
           <div class="container text-center">
@@ -245,6 +247,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -252,11 +255,14 @@ import ProtectedNavbar from "../components/ProtectedNavbar.vue";
 import MyModal from "../components/Modal.vue";
 import Swal from "sweetalert2";
 import { ref } from "vue";
+import TopBar from "@/components/top-bar.vue";
 
 export default {
   components: {
     ProtectedNavbar,
     MyModal,
+    TopBar
+
   },
   setup() {
     // Variable que controla el tema
@@ -438,6 +444,9 @@ export default {
 .dark {
   background-color: #555555; /* Fondo oscuro */
   color: #e0e0e0; /* Texto claro */
+}
+.content-wrapper {
+  margin-top: 80px; /* Ajusta este valor según la altura de tu top-bar */
 }
 /* Estilos para el contenedor principal */
 #capa-padre {

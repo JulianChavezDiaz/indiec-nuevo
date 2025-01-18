@@ -1,9 +1,12 @@
 <template>
   <div>
     <ProtectedNavbar />
+
     <!-- Modal Crear Canción -->
-    <div :class="['content', theme]">
-      <div class="header" :class="theme">
+    <top-bar /> <div :class="['content', theme]">
+    <div class="content-wrapper" :class="theme">
+
+      <div class="header">
         <div id="capa-padre">
           <div class="container text-center">
             <div class="row">
@@ -143,6 +146,7 @@
           </div>
         </div>
       </div>
+    </div>
 
       <!-- Botones para exportar y buscar -->
       <div class="button-container" :class="theme">
@@ -233,11 +237,13 @@ import ProtectedNavbar from "../components/ProtectedNavbar.vue";
 import MyModal from "../components/Modal.vue";
 import Swal from "sweetalert2";
 import { ref } from "vue";
+import TopBar from "@/components/top-bar.vue";
 
 export default {
   components: {
     ProtectedNavbar,
     MyModal,
+    TopBar
   },
   setup() {
     // Variable que controla el tema
@@ -413,6 +419,7 @@ export default {
 };
 </script>
 <style scoped>
+
 .content {
   min-height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
@@ -430,6 +437,12 @@ export default {
   background-color: #555555; /* Fondo oscuro */
   color: #e0e0e0; /* Texto claro */
 }
+
+
+.content-wrapper {
+  margin-top: 80px; /* Ajusta este valor según la altura de tu top-bar */
+}
+
 #capa-padre {
   background-image: url("/public/img/fondo 2.png");
   background-color: aliceblue;
