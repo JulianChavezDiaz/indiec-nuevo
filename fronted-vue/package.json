@@ -5,7 +5,7 @@
   "scripts": {
     "prestart": "chmod +x node_modules/.bin/vue-cli-service",
     "start": "vue-cli-service serve",
-    "serve": "vue-cli-service serve",
+    "serve": "NODE_ENV=production vue-cli-service serve",
     "prebuild": "chmod +x node_modules/.bin/vue-cli-service",
     "build": "vue-cli-service build"
   },
