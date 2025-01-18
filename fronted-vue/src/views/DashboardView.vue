@@ -116,25 +116,25 @@ export default {
       },
       {
         id: 2,
-        name: "Musica 2",
+        name: "Rumbera",
         image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg",
         hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-2.jpg",
       },
       {
         id: 3,
-        name: "Musica 3",
+        name: "sacudelo",
         image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg",
         hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-3.jpg",
       },
       {
         id: 4,
-        name: "Musica 4",
+        name: "El Gusanito",
         image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg",
         hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-4.jpg",
       },
       {
         id: 5,
-        name: "Musica 5",
+        name: "La Rumba",
         image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg",
         hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-5.jpg",
       },
@@ -143,7 +143,7 @@ export default {
     const selectedDate = ref(null);
 
     const pieChartData = ref({
-      labels: ["ballenita", "Musica 2", "Musica 3", "Musica 4", "Musica 5 "],
+      labels: ["ballenita", "Rumbera", "sacudelo", "El Gusanito", "La Rumba"],
       datasets: [
         {
           data: [10, 20, 60, 15, 25],
