@@ -13,6 +13,7 @@
             <h1 class="profile-name">{{ profile.name }}</h1>
             <p>{{ profile.profession }}</p>
             <button @click="editProfile" class="edit-profile-btn">Editar perfil</button>
+            <button @click="toggleTheme" class="theme-toggle" :class="theme" style="padding-left: 10px;margin-left: 50px;"> <i class="bi bi-moon"></i></button>
           </div>
         </div>
       </div>
@@ -71,12 +72,26 @@ import ProtectedNavbar from "../components/ProtectedNavbar.vue";
 import MyModal from "../components/Modal.vue";
 import Swal from "sweetalert2";
 import TopBar from "@/components/top-bar.vue";
+import { ref } from "vue";
+
 
 export default {
   components: {
     ProtectedNavbar,
     MyModal,
-    TopBar
+    TopBar,
+  },
+  setup() {
+    // Variable que controla el tema
+    const theme = ref(localStorage.getItem("theme") || "light");
+
+    // Método para alternar entre claro y oscuro
+    const toggleTheme = () => {
+      theme.value = theme.value === "light" ? "dark" : "light";
+      localStorage.setItem("theme", theme.value); // Guardar en localStorage
+    };
+
+    return { theme, toggleTheme };
   },
   data() {
     return {
@@ -156,6 +171,32 @@ export default {
 .container {
   width: 700px;
   height: 200px;
+}
+
+/* Estilo para el tema claro */
+.light {
+  background-color: #ffffff; /* Fondo blanco */
+  color: #000000; /* Texto negro */
+}
+
+/* Estilo para el tema oscuro */
+.dark {
+  background-color: #555555; /* Fondo oscuro */
+  color: #000000; /* Texto claro */
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #0aa5a9;
+  color: white;
+  border-radius: 13px;
+  text-transform: capitalize;
+}
+
+button:hover {
+  background-color: #067b80;
 }
 
 .banner-image {
