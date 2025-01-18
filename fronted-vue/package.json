@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prestart": "chmod +x node_modules/.bin/vue-cli-service",
     "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "prebuild": "chmod +x node_modules/.bin/vue-cli-service",
