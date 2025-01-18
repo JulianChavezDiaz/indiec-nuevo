@@ -9,13 +9,13 @@ import Calendar from 'primevue/calendar';
 import 'primevue/resources/themes/saga-blue/theme.css'; // Theme
 import 'primevue/resources/primevue.min.css';           // Core CSS
 import 'primeicons/primeicons.css';                     // Icons
-import 'primeflex/primeflex.css';                       // PrimeFl
+import 'primeflex/primeflex.css';                       // PrimeFlex
 
-import { registerLicense } from '@syncfusion/ej2-base'
+import { registerLicense } from '@syncfusion/ej2-base';
 
-registerLicense("Ngo9BigBOggjHTQxAR8/V1NCaF5cXmZCdkx3Q3xbf1x0ZFRMZV5bQHBPIiBoS35RckVkWHZfcnFRQ2BaVUd0")
+registerLicense("Ngo9BigBOggjHTQxAR8/V1NCaF5cXmZCdkx3Q3xbf1x0ZFRMZV5bQHBPIiBoS35RckVkWHZfcnFRQ2BaVUd0");
 
-// Configurar Axios para incluir el token en todas las solicitudes
+// Configuración de Axios para incluir el token en todas las solicitudes
 axios.interceptors.request.use(
   config => {
     const token = localStorage.getItem('token');

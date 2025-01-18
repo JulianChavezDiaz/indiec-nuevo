@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prestart": "chmod +x node_modules/.bin/vue-cli-service",
-    "start": "vue-cli-service serve",
-    "serve": "NODE_ENV=production vue-cli-service serve",
-    "prebuild": "chmod +x node_modules/.bin/vue-cli-service",
-    "build": "vue-cli-service build"
+    "serve": "vue-cli-service serve", 
+    "build": "vue-cli-service build", 
+    "start": "serve -s dist", 
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
@@ -17,7 +16,6 @@
     "@vuepic/vue-datepicker": "^11.0.1",
     "animate.css": "^4.1.1",
     "axios": "^1.7.2",
-    "boostrap": "^2.0.0",
     "bootstrap": "^5.3.3",
     "bootstrap-vue": "^2.23.1",
     "chart.js": "^4.4.3",
@@ -43,7 +41,8 @@
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "case-sensitive-paths-webpack-plugin": "^2.4.0"
+    "case-sensitive-paths-webpack-plugin": "^2.4.0",
+    "serve": "^14.2.4"
   },
   "browserslist": [
     "> 1%",
