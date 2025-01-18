@@ -1,8 +1,9 @@
 <template>
   <div>
     <ProtectedNavbar />
-    <!-- Modal Crear Canción -->
-    <div class="content">
+    <top-bar /><div class="content">
+    <div class="content-wrapper">
+    
       <div class="header">
         <div id="capa-padre">
           <h1>Canción</h1>
@@ -94,6 +95,7 @@
           </div>
         </div>
       </div>
+    </div>
 
       <!-- Botones para exportar y buscar -->
       <div class="button-container">
@@ -178,11 +180,15 @@
 import ProtectedNavbar from "../components/ProtectedNavbar.vue";
 import MyModal from "../components/Modal.vue";
 import Swal from "sweetalert2";
+import TopBar from "@/components/top-bar.vue";
+
+
 
 export default {
   components: {
     ProtectedNavbar,
     MyModal,
+    TopBar
   },
   data() {
     return {
@@ -337,6 +343,10 @@ export default {
 };
 </script>
 <style scoped>
+
+.content-wrapper {
+  margin-top: 80px; /* Ajusta este valor según la altura de tu top-bar */
+}
 #capa-padre {
   background-color: aliceblue;
   border-radius: 20px;
