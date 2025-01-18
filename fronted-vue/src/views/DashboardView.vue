@@ -1,11 +1,11 @@
 <template>
   <ProtectedNavbar />
-  <div :class="['content', theme]">
-<<<<<<< HEAD
+  <div class="content">
     <div class="header">
       <div id="inicio">
-        <h1>
-          "Da vida a la música: organiza géneros, crea grupos, impulsa artistas y lleva tus eventos al siguiente nivel."
+        <h1 style="color: white;">
+          "Da vida a la música: organiza géneros, crea grupos, impulsa artistas y lleva
+          tus eventos al siguiente nivel."
         </h1>
       </div>
       <div id="capa-padre">
@@ -32,7 +32,11 @@
             </div>
             <!-- Notificaciones (al lado derecho del calendario) -->
             <div class="notifications-container">
-              <div v-for="(notification, index) in notifications" :key="index" class="notification-bar">
+              <div
+                v-for="(notification, index) in notifications"
+                :key="index"
+                class="notification-bar"
+              >
                 <p>{{ notification.date }}</p>
                 <!-- Barra de Progreso Estática y de color verde -->
                 <progress class="green-progress" value="100" max="100"></progress>
@@ -49,7 +53,11 @@
             >
               <div
                 class="card-image"
-                :style="{ backgroundImage: `url(${hoveredIndex === index ? data.hoverImage : data.image})` }"
+                :style="{
+                  backgroundImage: `url(${
+                    hoveredIndex === index ? data.hoverImage : data.image
+                  })`,
+                }"
               ></div>
               <div class="main-content">
                 <p>{{ data.name }}</p>
@@ -72,23 +80,9 @@
         </div>
       </div>
     </div>
-    <!-- Botón para cambiar de tema -->
-=======
-    <!-- Contenedor principal -->
-    <div id="inicio" :class="theme">
-      <h1>Inicio</h1> <!-- Palabra clave: Inicio -->
-    </div>
-    <div id="app-2"></div>
-    <!-- Botón para alternar el tema -->
->>>>>>> 13892685d4ce2a82f83e1db748f2f52541dffd32
-    <button @click="toggleTheme" class="theme-toggle">
-      Cambiar Tema
-    </button>
   </div>
-    <div class="img-01">
-    </div>
-</template>
 
+</template>
 
 <script>
 import ProtectedNavbar from "../components/ProtectedNavbar.vue";
@@ -113,22 +107,46 @@ export default {
       localStorage.setItem("theme", theme.value); // Guardar en localStorage
     };
 
-<<<<<<< HEAD
     const percentageData = ref([
-      { id: 1, name: "Cantante 1", image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg", hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-1.jpg" },
-      { id: 2, name: "Cantante 2", image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg", hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-2.jpg" },
-      { id: 3, name: "Cantante 3", image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg", hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-3.jpg" },
-      { id: 4, name: "Cantante 4", image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg", hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-4.jpg" },
-      { id: 5, name: "Cantante 5", image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg", hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-5.jpg" },
+      {
+        id: 1,
+        name: "Ballenita",
+        image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg",
+        hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-1.jpg",
+      },
+      {
+        id: 2,
+        name: "Musica 2",
+        image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg",
+        hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-2.jpg",
+      },
+      {
+        id: 3,
+        name: "Musica 3",
+        image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg",
+        hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-3.jpg",
+      },
+      {
+        id: 4,
+        name: "Musica 4",
+        image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg",
+        hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-4.jpg",
+      },
+      {
+        id: 5,
+        name: "Musica 5",
+        image: "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg",
+        hoverImage: "https://i.postimg.cc/7Yk5szS7/hover-image-5.jpg",
+      },
     ]);
 
     const selectedDate = ref(null);
 
     const pieChartData = ref({
-      labels: ["Limit 1", "Limit 2", "Limit 3", "Limit 4", "Limit 5"],
+      labels: ["ballenita", "Musica 2", "Musica 3", "Musica 4", "Musica 5 "],
       datasets: [
         {
-          data: [10, 20, 30, 15, 25],
+          data: [10, 20, 60, 15, 25],
           backgroundColor: ["#FF8977", "#89A2EB", "#FFCE89", "#FFCE19", "#36A2EB"],
         },
       ],
@@ -139,7 +157,10 @@ export default {
     const notifications = ref([
       { date: "Fecha del evento: 11-01-2025", message: "¡Evento en 5 días!" },
       { date: "Fecha del evento: 12-01-2025", message: "¡Próximo evento en 2 días!" },
-      { date: "Fecha del evento: 15-01-2025", message: "¡Última oportunidad para registrarse!" },
+      {
+        date: "Fecha del evento: 15-01-2025",
+        message: "¡Última oportunidad para registrarse!",
+      },
     ]);
 
     const createPieChart = () => {
@@ -171,75 +192,29 @@ export default {
 
     const hoveredIndex = ref(null);
 
-    return { theme, toggleTheme, percentageData, selectedDate, notifications, hoveredIndex };
-=======
-    return { theme, toggleTheme };
-  },
-  methods: {
-    // Método para cerrar sesión
-    logout() {
-      localStorage.removeItem("token");
-      this.$router.push("/login");
-    },
->>>>>>> 13892685d4ce2a82f83e1db748f2f52541dffd32
+    return {
+      theme,
+      toggleTheme,
+      percentageData,
+      selectedDate,
+      notifications,
+      hoveredIndex,
+    };
   },
 };
 </script>
 
 <style scoped>
-<<<<<<< HEAD
 @import "../../node_modules/@syncfusion/ej2-base/styles/material.css";
 @import "../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
 @import "../../node_modules/@syncfusion/ej2-vue-calendars/styles/material.css";
-@import '@vuepic/vue-datepicker/dist/main.css';
+@import "@vuepic/vue-datepicker/dist/main.css";
 
 #inicio h1 {
   font-size: 1.5em;
   font-weight: normal;
 }
 
-=======
-/* Base del contenedor principal */
-.content {
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
-  display: flex;
-  flex-direction: column; /* Organización en columna */
-}
-
-/* Estilo para el tema claro */
-.light {
-  background-color: #ffffff; /* Fondo blanco */
-  color: #000000; /* Texto negro */
-}
-
-/* Estilo para el tema oscuro */
-.dark {
-  background-color: #121212; /* Fondo oscuro */
-  color: #e0e0e0; /* Texto claro */
-}
-
-/* Botón para cambiar tema */
-.theme-toggle {
-  margin: 20px auto;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  background-color: #4caf50; /* Verde */
-  color: #ffffff;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.theme-toggle:hover {
-  background-color: #45a049; /* Verde oscuro al pasar el mouse */
-}
-
-/* Contenedor del encabezado */
-
-
-/* Estilos del encabezado */
->>>>>>> 13892685d4ce2a82f83e1db748f2f52541dffd32
 #inicio {
   display: flex;
   justify-content: center;
@@ -249,7 +224,6 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   text-align: center;
-<<<<<<< HEAD
   padding: 5px;
   border-radius: 20px;
 }
@@ -381,42 +355,10 @@ canvas {
 }
 
 .coin-base {
-=======
-  padding: 20px;
-  border-radius: 20px;
-  margin-top: 10px;
-  width: 100%;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilo para el texto dentro de #inicio en temas claros */
-#inicio.light h1 {
-  color: #000000; /* Negro para tema claro */
-}
-
-/* Estilo para el texto dentro de #inicio en temas oscuros */
-#inicio.dark h1 {
-  color: #e0e0e0; /* Blanco o gris claro para tema oscuro */
-}
-
-/* Ajuste para el segundo contenedor */
-#app-2 {
-  text-align: center;
-  flex: 1; /* Expande el contenido */
-}
-
-/* Otros estilos */
-
-
-/* Estilos adicionales */
-.contenedor {
-  height: 40vh;
->>>>>>> 13892685d4ce2a82f83e1db748f2f52541dffd32
   display: flex;
   justify-content: center;
   align-items: center;
 }
-<<<<<<< HEAD
 
 .small-image {
   width: 1em;
@@ -472,18 +414,4 @@ canvas {
     justify-content: space-around;
   }
 }
-=======
-.img-01{
-    background-image: url("/public/img/fondo1.png");
-    background-size: cover;
-    background-position: absolute;
-    background-repeat: no-repeat;
-    width: 587.49px;
-    height: 571.91px;
-    border-radius: 25px;
-    position:absolute;
-    left: calc(50% - 587.49px/2 + 455.24px);
-    top: calc(50% - 571.91px/2 + 221.95px);
-   }
->>>>>>> 13892685d4ce2a82f83e1db748f2f52541dffd32
 </style>
